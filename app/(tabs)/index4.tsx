@@ -1,12 +1,12 @@
-import { View, Text, Pressable, ScrollView,SafeAreaView } from 'react-native'
+import { View, Text, Pressable, ScrollView } from 'react-native'
 import { Link } from 'expo-router'
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-fundo p-6">
+    <View className="flex-1 bg-fundo p-6">
       {/* Cabeçalho */}
       <View className="mb-8">
-        <Text className="text-texto text-3xl font-inter-extra">Bem-vindo</Text>
+        <Text className="text-texto text-3xl font-inter-extra">Bem-vindo2</Text>
         <Text className="text-azul-claro text-lg font-inter-m">
           Ao seu app ViHub
         </Text>
@@ -51,6 +51,6 @@ export default function HomeScreen() {
           © 2023 ViHub - Todos os direitos reservados
         </Text>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }

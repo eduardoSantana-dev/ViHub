@@ -1,57 +1,99 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
+import { Link, Tabs, Stack } from 'expo-router';
+import { Pressable, Image } from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Platform } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Inter_600SemiBold } from '@expo-google-fonts/inter';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function Layout() {
+  const insets = useSafeAreaInsets(); // pega a altura da área segura
+  const icon_size = 30
   return (
+
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: '#151B26',
+          borderTopWidth: 0,
+          height: 65,
+          paddingBottom: 10,
+          paddingTop: 10,
+          marginHorizontal: 10,
+          borderRadius: 20,
+          position: 'absolute',
+          bottom: 40,
+
+        },
+        tabBarItemStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+          marginTop: -2,
+        },
+        tabBarActiveTintColor: '#fff',
+        tabBarInactiveTintColor: '#555',
+        tabBarActiverOpacity:1,
+        headerShown: false,
+      }}
+    >
+
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="user" size={icon_size} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="index2"
+        options={{
+
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="clipboard" size={icon_size} color={color} />
+
+          ),
+        }}
+      />
+     <Tabs.Screen
+  name="index3"
+  options={{
+    tabBarIcon: ({ focused }) => (
+      <Image
+        source={require('../../assets/images/logoBranca.svg')}
+        style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
+      />
+    ),
+  }}
+/>
+      <Tabs.Screen
+        name="index4"
+        options={{
+
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="school" size={icon_size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="index5"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="dollar" size={icon_size} color={color} />
+          ),
         }}
       />
     </Tabs>
