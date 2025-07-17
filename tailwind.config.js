@@ -1,15 +1,22 @@
-import { colors } from './styles/colors';
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
-  ],
+  // NOTE: Update this to include the paths to all files that contain Nativewind classes.
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
-      colors: colors, 
+      colors:{
+         azul: '#A5D2FF',
+    fundo: '#0A0D13',
+    cards: '#151B26',
+    roxo: '#7747ED',
+    azulescuro: '#003D60',
+    verde: '#53E69E',
+    vermelho: '#F66D65',
+    texto: '#FFFFFF',
+    texto2:'#73767D',
+    select:'#6082A8'
+      },
       fontFamily: {
         sans: ['Inter_400Regular', 'sans-serif'], 
         'inter': ['Inter_400Regular', 'sans-serif'], 
@@ -17,6 +24,9 @@ module.exports = {
         'inter-b': ['Inter_700Bold', 'sans-serif'],
         'inter-extra': ['Inter_800ExtraBold', 'sans-serif'],
       },
+       borderRadius: {
+        'padrao': '15px',
+      }
     },
   },
   plugins: [],

@@ -1,7 +1,7 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs, Stack } from 'expo-router';
 import { Pressable, Image } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 import Colors from '@/constants/Colors';
@@ -9,11 +9,11 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter';
-
-
+import '../../styles/global.css'
 export default function Layout() {
   const insets = useSafeAreaInsets(); // pega a altura da área segura
   const icon_size = 30
+
   return (
 
     <Tabs
@@ -42,11 +42,20 @@ export default function Layout() {
         },
         tabBarActiveTintColor: '#fff',
         tabBarInactiveTintColor: '#555',
-        tabBarActiverOpacity:1,
         headerShown: false,
       }}
     >
-
+ <Tabs.Screen
+  name="projetos"
+  options={{
+    tabBarIcon: ({ focused }) => (
+      <Image
+        source={require('../../assets/images/logoBranca.svg')}
+        style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
+      />
+    ),
+  }}
+/>
       <Tabs.Screen
         name="index"
         options={{
@@ -67,17 +76,7 @@ export default function Layout() {
           ),
         }}
       />
-     <Tabs.Screen
-  name="index3"
-  options={{
-    tabBarIcon: ({ focused }) => (
-      <Image
-        source={require('../../assets/images/logoBranca.svg')}
-        style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
-      />
-    ),
-  }}
-/>
+    
       <Tabs.Screen
         name="index4"
         options={{
