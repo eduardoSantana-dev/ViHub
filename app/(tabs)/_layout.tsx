@@ -5,8 +5,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter';
 import '../../styles/global.css'
@@ -67,7 +66,7 @@ export default function Layout() {
       />
 
       <Tabs.Screen
-        name="index2"
+        name="tarefas"
         options={{
 
           tabBarIcon: ({ color }) => (
@@ -87,7 +86,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="index5"
+        name="index2"
         options={{
 
           tabBarIcon: ({ color }) => (
