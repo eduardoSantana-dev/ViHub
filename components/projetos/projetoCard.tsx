@@ -32,7 +32,7 @@ export default function ProjetoCard({ header }: Props) {
 
                     </View>
                 )}
-                ListHeaderComponent={header}
+                ListHeaderComponent={header ? () => <>{header}</> : null}
 
 
             />

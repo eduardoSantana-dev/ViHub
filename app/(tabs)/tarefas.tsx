@@ -6,7 +6,8 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../styles/colors';
 import '../../styles/global.css'
 import React, { useState } from 'react';
-import TarefasCard from '../../components/tarefas/tarefasCard'
+import TarefaLista from '../../components/tarefas/tarefasLista'
+
 export default function Tarefas() {
 
   const [selecionado, setSelecionado] = useState('');
@@ -51,7 +52,7 @@ export default function Tarefas() {
   )
   return (
     <SafeAreaView className='flex-1 bg-fundo  pt-7'>
-     <TarefasCard header={<Header/>}/>
+     <TarefaLista header={<Header/>}/>
       </SafeAreaView>
   )
 }
