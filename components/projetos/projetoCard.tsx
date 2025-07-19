@@ -1,6 +1,6 @@
 import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image, FlatList } from 'react-native'
 import React from 'react'
-
+import { Redirect, router } from 'expo-router';
 interface Props {
     header?: React.ReactNode;
 }
@@ -12,7 +12,9 @@ export default function ProjetoCard({ header }: Props) {
         {id:3,nome:'TCC',fase:0}
 
     ];
-
+    function verProjeto(id:number){
+       router.push(`/projeto/projeto?id=${id}`)
+    }
     return (
         
             <FlatList
@@ -20,7 +22,7 @@ export default function ProjetoCard({ header }: Props) {
                 keyExtractor={(item, index) => index.toString()}
                 
                 renderItem={({ item:projeto }) => (
-                    <View className='bg-cards  px-5 py-2 rounded-padrao mt-7 mx-6 '>
+                    <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 mx-pp ' onPress={()=> verProjeto(projeto.id)}>
                         <View className='flex-row justify-between'>
                             <Text className='font-inter-b text-3xl text-texto mt-2'>{projeto.nome}</Text>
                             <Image source={require('../../assets/images/logoBranca.svg')} className='w-7 h-7' />
@@ -30,7 +32,7 @@ export default function ProjetoCard({ header }: Props) {
                             <Text className='font-inter-m text-texto2 text-lg'>Em andamento</Text>
                         </View>
 
-                    </View>
+                    </Pressable>
                 )}
                 ListHeaderComponent={header ? () => <>{header}</> : null}
 

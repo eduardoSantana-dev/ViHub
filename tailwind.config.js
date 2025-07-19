@@ -15,7 +15,8 @@ module.exports = {
     vermelho: '#F66D65',
     texto: '#FFFFFF',
     texto2:'#73767D',
-    select:'#6082A8'
+    select:'#6082A8',
+    azul2:'#233048',
       },
       fontFamily: {
         sans: ['Inter_400Regular', 'sans-serif'], 
@@ -26,6 +27,13 @@ module.exports = {
       },
        borderRadius: {
         'padrao': '15px',
+      
+      },
+      padding:{
+        'pp':'20px'
+      },
+      margin:{
+        'pp':'20px'
       }
     },
   },

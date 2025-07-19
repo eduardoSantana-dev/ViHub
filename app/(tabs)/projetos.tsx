@@ -18,7 +18,7 @@ export default function Projetos() {
   const Header = () => (
     
      <>
-      <View className='px-8'>
+      <View className='px-pp'>
         <View className='flex-row justify-between items-center'>
           <Text className='color-texto font-inter-b text-4xl'>Projetos</Text>
           <Ionicons name="add-circle-outline" size={45} color={colors.texto2} />
@@ -38,7 +38,7 @@ export default function Projetos() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 5, paddingHorizontal: 10, height: 32 }}
         >
-          <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 15 }} onPress={() => filtrar('todos')}>
+          <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 10 }} onPress={() => filtrar('todos')}>
             <Text className='text-texto font-inter-b'>Todos</Text>
           </Pressable>
           <Pressable className={selecionado == 'planejamento' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('planejamento')}>

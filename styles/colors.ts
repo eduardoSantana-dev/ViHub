@@ -9,6 +9,6 @@ export const colors = {
     vermelho: '#F66D65',
     texto: '#FFFFFF',
     texto2:'#73767D',
-    select:'#181F28'
-
+    select:'#181F28',
+    azul2:'#233048'
 }
