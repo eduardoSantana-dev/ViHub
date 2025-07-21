@@ -1,13 +1,14 @@
 import { View, Text, Pressable, ScrollView, TouchableOpacity, Image } from 'react-native'
-import { Link, router, useLocalSearchParams } from 'expo-router'
+import { Href, Link, router, useLocalSearchParams } from 'expo-router'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../styles/colors';
-import HeaderBack from '@/components/globais/headerBack';
 export default function HomeScreen() {
-  const { id } = useLocalSearchParams();
+  const { idAtividade } = useLocalSearchParams();
+  const atividade ='projeto'
   const dataTeste = [{id:1,desc:'Prototipar projeto no figma'},{id:2,desc:'Prototipar projeto no figma2'},{id:3,desc:'Prototipar projeto no figma2'}]
+  
   const cards = [
     {
     titulo: 'Tarefas', icon: 'clipboard-text-multiple-outline' ,data:dataTeste
@@ -19,11 +20,17 @@ export default function HomeScreen() {
     titulo: 'Inspirações', icon: 'star-box-multiple' ,data:[]
   }
 ]
+  function irRota(tela: string) {
+    
+  router.push({
+  pathname: "/template/listaBase",
+  params: { idAtividade ,tela,atividade},
+});
+}
   return (
     <SafeAreaView className='bg-fundo flex-1'>
-      <HeaderBack />
       <ScrollView className='flex-1 px-pp'>
-        <View className='flex-row -600 mt-6 gap-2'>
+        <View className='flex-row -600  gap-2'>
           <View className='w-20 h-20 '>
             <Image source={require('../../assets/images/logoBranca.svg')} className='w-full h-full' />
           </View>
@@ -40,7 +47,7 @@ export default function HomeScreen() {
           </View>
         </View>
         {cards.map((card)=>(
-          <Pressable className='w-full bg-cards  mt-10 rounded-padrao flex-row p-4 pb-6 gap-5' key={card.titulo}>
+          <Pressable className='w-full bg-cards  mt-10 rounded-padrao flex-row p-4 pb-6 gap-5' key={card.titulo} onPress={()=> irRota(card.titulo)}>
           <View className=''>
             <View className='bg-azul2 p-3 rounded-3xl items-center justify-center'>
               <MaterialCommunityIcons name={card.icon as any} size={70} color={colors.azul} />

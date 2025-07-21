@@ -3,11 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '@/styles/colors';
-interface Tarefa {
-  id: number;
-  nome: string;
-  fase: string;
-}
+
 export default function CardTarefa({ tarefa }: { tarefa: Tarefa }) {
     return(
         <View className='bg-cards  px-5 py-2 rounded-padrao  flex-row  justify-between items-center'>

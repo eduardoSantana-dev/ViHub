@@ -6,7 +6,7 @@ import { useFonts, Inter_400Regular, Inter_500Medium, Inter_700Bold, Inter_800Ex
 import { View, ActivityIndicator } from 'react-native';
 import '../styles/global.css'; // Tailwind global
 import { colors } from '../styles/colors';
-
+import HeaderBack from '@/components/globais/headerBack';
 export default function Layout() {
 
   const [fontsLoaded] = useFonts({
@@ -19,9 +19,25 @@ export default function Layout() {
  
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 ,backgroundColor:colors.fundo}}>
     
-       <Slot />
+   <Stack
+  screenOptions={{
+    headerShown: true,
+    contentStyle: { backgroundColor: colors.fundo },
+    animation: 'simple_push',
+    gestureEnabled: true,
+    statusBarStyle: 'auto',
+    header: () => <HeaderBack />, // Header customizado
+  }}
+>
+  <Stack.Screen
+    name="(tabs)"
+    options={{
+      headerShown: false, // Esconde o header na rota (tabs)
+    }}
+  />
+</Stack>
      
     </GestureHandlerRootView>
   );

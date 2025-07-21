@@ -17,6 +17,7 @@ export default function Layout() {
 
     <Tabs
       screenOptions={{
+        
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: '#151B26',
@@ -47,6 +48,7 @@ export default function Layout() {
  <Tabs.Screen
   name="projetos"
   options={{
+    
     tabBarIcon: ({ focused }) => (
       <Image
         source={require('../../assets/images/logoBranca.svg')}

@@ -7,11 +7,11 @@ import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-hand
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import CardTarefa from './tarefaCard'
+import InspiracaoCard from './inspiracaoCard'
 
 
-export default function TarefaLista({ header }: Props) {
-    const [tarefas, setTarefas] = useState<tarefa[]>([]);
+export default function ListaInspiracoes({ header }: Props) {
+    const [Inspiracoes, setInspiracoes] = useState<Inspiracoes[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
     const deletarIcon = () => {
         return (
@@ -20,55 +20,38 @@ export default function TarefaLista({ header }: Props) {
             </RectButton>
         );
     };
-    const finalizarIcon = () => {
-        return (
-            <RectButton style={[styles.icon_Swipeable, { marginLeft: 25 }]} onPress={() => console.log('Delete pressed')}>
-                <Ionicons name='checkmark-circle-outline' size={35} color={colors.verde} />
-            </RectButton>
-        );
-    };
     function verificarLado(direction: string, id: number) {
 
         if (direction == 'left') {
-            deletarTarefa(id)
-        }
-        if (direction == 'right') {
-            finalizar(id)
-
+            deletarInspiracoes(id)
         }
         swipeableRef.current?.close();
 
     }
-    async function deletarTarefa(id: number) {
-        setTarefas(prev => prev.filter(t => t.id !== id));
+    async function deletarInspiracoes(id: number) {
+        setInspiracoes(prev => prev.filter(t => t.id !== id));
     }
-    function finalizar(id: number,) {
-        setTarefas(prev =>
-            prev.map(tarefa =>
-                tarefa.id === id ? { ...tarefa, fase: 'finalizado' } : tarefa
-            )
-        );
-
-    }
-    const carregarTarefas = () => {
+   
+ 
+    const carregarInspiracoess = () => {
         const temp = [
-            { id: 1, nome: 'Testa api com laravel e no banco com tudo incluso ,teste no app e no web para ', fase: 'finalizado' },
-            { id: 2, nome: 'Vicuna', fase: 'em andamento' },
-            { id: 3, nome: 'TCC', fase: 'atrasado' }
+            { id: 1, nome: 'ideia ', data: '20/20/2025' },
+            { id: 2, nome: 'Vicuna', data: 'em andamento' },
+            { id: 3, nome: 'TCC', data: 'atrasado' }
         ];
-        setTarefas(temp);
+        setInspiracoes(temp);
     };
     useEffect(() => {
-        carregarTarefas()
+        carregarInspiracoess()
     }, [])
 
     return (
 
         <FlatList
-            data={tarefas}
+            data={Inspiracoes}
             keyExtractor={(item, index) => item.id.toString()}
 
-            renderItem={({ item: tarefa }) => {
+            renderItem={({ item: Inspiracoes }) => {
 
                 return (
 
@@ -79,10 +62,10 @@ export default function TarefaLista({ header }: Props) {
                         enableTrackpadTwoFingerGesture
                         rightThreshold={100}
                         renderRightActions={deletarIcon}
-                        renderLeftActions={finalizarIcon}
-                        onSwipeableWillOpen={(direction) => verificarLado(direction, tarefa.id)}
+                       
+                        onSwipeableWillOpen={(direction) => verificarLado(direction, Inspiracoes.id)}
                     >
-                        <CardTarefa tarefa={tarefa}/>
+                        <InspiracaoCard Inspiracoes={Inspiracoes}/>
                     </ReanimatedSwipeable>
 
                 )

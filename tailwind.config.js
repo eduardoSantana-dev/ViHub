@@ -34,6 +34,9 @@ module.exports = {
       },
       margin:{
         'pp':'20px'
+      },
+      width:{
+        'img':'10.8rem'
       }
     },
   },

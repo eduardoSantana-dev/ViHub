@@ -1,19 +1,18 @@
 import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image, FlatList } from 'react-native'
 import React from 'react'
 import { Redirect, router } from 'expo-router';
-interface Props {
-    header?: React.ReactNode;
-}
+
 export default function ProjetoCard({ header }: Props) {
    
     const projetos = [
         {id:1,nome:'ViHub',fase:0},
         {id:2,nome:'Vicuna',fase:0},
         {id:3,nome:'TCC',fase:0}
+        
 
     ];
     function verProjeto(id:number){
-       router.push(`/projeto/projeto?id=${id}`)
+       router.push(`/projeto/projeto?idAtividade=${id}`)
     }
     return (
         
