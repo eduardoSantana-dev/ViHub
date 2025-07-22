@@ -8,7 +8,7 @@ export default function CardTarefa({ tarefa }: { tarefa: Tarefa }) {
     return(
         <View className='bg-cards  px-5 py-2 rounded-padrao  flex-row  justify-between items-center'>
                                     <View className='justify-between w-10/12'>
-                                        <Text className='font-inter  text-texto mt-2'>{tarefa.nome}</Text>
+                                        <Text className='font-inter  text-texto mt-2 line-clamp-4'>{tarefa.nome}</Text>
                                         <Text className='font-inter-m text-texto2 text-lg mt-2'>{tarefa.fase}</Text>
                                     </View>
                                     <View className='flex-row justify-between'>

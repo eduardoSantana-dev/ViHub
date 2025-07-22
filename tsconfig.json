@@ -3,6 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
+    "@colors*": ["./styles/colors.ts"],
+     "@listas/*": ["./components/listas/*"],
+     "@modais/*": ["./components/modais/*"],
+     "@logo/*":["./assets/images/logo/*"],
       "@/*": [
         "./*"
       ]

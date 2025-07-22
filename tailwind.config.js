@@ -15,8 +15,10 @@ module.exports = {
     vermelho: '#F66D65',
     texto: '#FFFFFF',
     texto2:'#73767D',
+     textobotao:'#151B26',
     select:'#6082A8',
     azul2:'#233048',
+    fundoModal:'rgba(0,0,0,0.6)'
       },
       fontFamily: {
         sans: ['Inter_400Regular', 'sans-serif'], 
@@ -36,7 +38,8 @@ module.exports = {
         'pp':'20px'
       },
       width:{
-        'img':'10.8rem'
+        'img':'10.8rem',
+        'dateInput':'47%'
       }
     },
   },

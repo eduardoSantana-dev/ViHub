@@ -4,7 +4,7 @@ import { Pressable, Image } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
-import Colors from '@/constants/Colors';
+import {colors} from '@colors'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter';
@@ -20,7 +20,7 @@ export default function Layout() {
         
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#151B26',
+          backgroundColor:colors.cards,
           borderTopWidth: 0,
           height: 65,
           paddingBottom: 10,
@@ -51,7 +51,7 @@ export default function Layout() {
     
     tabBarIcon: ({ focused }) => (
       <Image
-        source={require('../../assets/images/logoBranca.svg')}
+        source={require('@logo/branco.svg')}
         style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
       />
     ),

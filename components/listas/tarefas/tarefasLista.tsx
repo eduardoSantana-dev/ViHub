@@ -1,13 +1,10 @@
-import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image, FlatList, StyleSheet } from 'react-native'
-import React, { useEffect, useState, useRef } from 'react'
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '@/styles/colors';
-import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import CardTarefa from './tarefaCard'
+import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
+import CardTarefa from './tarefaCard';
 
 
 export default function TarefaLista({ header }: Props) {
@@ -52,7 +49,7 @@ export default function TarefaLista({ header }: Props) {
     }
     const carregarTarefas = () => {
         const temp = [
-            { id: 1, nome: 'Testa api com laravel e no banco com tudo incluso ,teste no app e no web para ', fase: 'finalizado' },
+            { id: 1, nome: 'O céu estava limpo, e o vento suave balançava as árvores enquanto o sol dourado iluminava os campos. Pessoas caminhavam tranquilas pelas ruas, aproveitando cada instante daquele dia perfeito.', fase: 'finalizado' },
             { id: 2, nome: 'Vicuna', fase: 'em andamento' },
             { id: 3, nome: 'TCC', fase: 'atrasado' }
         ];
@@ -100,6 +97,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         justifyContent: 'center',
         paddingHorizontal: 25,
+        
 
     },
     icon_Swipeable: {

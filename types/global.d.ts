@@ -9,6 +9,12 @@ declare global {
       nome: string;
       data: string
   }
+    type materia = {
+      id: number;
+      nome: string;
+      totalTarefas: number;
+      completadas:number
+  }
   type tarefa = {
       id: number;
       nome: string;
@@ -35,4 +41,4 @@ declare global {
 
 }
 
-export {};
+export { };

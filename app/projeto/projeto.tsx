@@ -1,9 +1,9 @@
-import { View, Text, Pressable, ScrollView, TouchableOpacity, Image } from 'react-native'
-import { Href, Link, router, useLocalSearchParams } from 'expo-router'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { router, useLocalSearchParams } from 'expo-router';
+import { Image, Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../styles/colors';
+import EditarProjeto from '@modais/projeto//editarProjetoModal'
 export default function HomeScreen() {
   const { idAtividade } = useLocalSearchParams();
   const atividade ='projeto'
@@ -18,6 +18,9 @@ export default function HomeScreen() {
   },
   {
     titulo: 'Inspirações', icon: 'star-box-multiple' ,data:[]
+  },
+   {
+    titulo: 'Materias', icon: 'star-box-multiple' ,data:[]
   }
 ]
   function irRota(tela: string) {
@@ -32,14 +35,14 @@ export default function HomeScreen() {
       <ScrollView className='flex-1 px-pp'>
         <View className='flex-row -600  gap-2'>
           <View className='w-20 h-20 '>
-            <Image source={require('../../assets/images/logoBranca.svg')} className='w-full h-full' />
+            <Image source={require('@logo/branco.svg')} className='w-full h-full' />
           </View>
           <View className='justify-center mt-4'>
             <View className='flex-row items-center gap-4'>
-              <Text className='font-inter-b text-4xl color-texto'>
-                ViHub
+              <Text className='font-inter-b text-4xl  w-64 flex-wrap color-texto'>
+                Vihub
               </Text>
-              <MaterialCommunityIcons color={colors.texto} name='pencil' size={25} />
+              <EditarProjeto/>
             </View>
             <Text className='font-inter-b text-xl color-texto2'>
               Em andamento

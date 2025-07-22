@@ -1,8 +1,7 @@
-import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image, FlatList, StyleSheet } from 'react-native'
-import React, { useEffect, useState, useRef } from 'react'
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '@/styles/colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
+import { Image, Text, View } from 'react-native';
 
 export default function InspiracaoCard({ Inspiracoes }: { Inspiracoes: Inspiracoes }) {
     return (

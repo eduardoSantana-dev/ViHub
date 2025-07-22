@@ -5,7 +5,7 @@ import { Redirect, router } from 'expo-router';
 export default function ProjetoCard({ header }: Props) {
    
     const projetos = [
-        {id:1,nome:'ViHub',fase:0},
+        {id:1,nome:'Vihub',fase:0},
         {id:2,nome:'Vicuna',fase:0},
         {id:3,nome:'TCC',fase:0}
         
@@ -24,7 +24,7 @@ export default function ProjetoCard({ header }: Props) {
                     <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 mx-pp ' onPress={()=> verProjeto(projeto.id)}>
                         <View className='flex-row justify-between'>
                             <Text className='font-inter-b text-3xl text-texto mt-2'>{projeto.nome}</Text>
-                            <Image source={require('../../assets/images/logoBranca.svg')} className='w-7 h-7' />
+                            <Image source={require('@logo/branco.svg')} className='w-7 h-7' />
                         </View>
                         <View className='flex-row justify-between mt-3'>
                             <Text className='font-inter-m text-texto2 text-lg'>5 Trefas</Text>

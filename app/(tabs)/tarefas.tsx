@@ -1,12 +1,11 @@
-import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image } from 'react-native'
-import { Link } from 'expo-router'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../styles/colors';
-import '../../styles/global.css'
+import { Ionicons } from '@expo/vector-icons';
+import TarefaLista from '@listas/tarefas/tarefasLista';
 import React, { useState } from 'react';
-import TarefaLista from '../../components/tarefas/tarefasLista'
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors } from '../../styles/colors';
+import CriarTarefa from '@modais/tarefa/novaTarefaModal'
+import '../../styles/global.css';
 
 export default function Tarefas() {
 
@@ -22,7 +21,7 @@ export default function Tarefas() {
       <View className='px-8'>
         <View className='flex-row justify-between items-center'>
           <Text className='color-texto font-inter-b text-4xl'>Tarefas</Text>
-          <Ionicons name="add-circle-outline" size={45} color={colors.texto2} />
+          <CriarTarefa/>
         </View>
         
       </View>
