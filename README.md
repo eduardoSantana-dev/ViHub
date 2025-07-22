@@ -1,2 +1,2 @@
 # ViHub
-aplicativo de organização pessoal (em desenvolvimento)
+aplicativo react native com typescript 
