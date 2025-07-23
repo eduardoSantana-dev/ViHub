@@ -19,9 +19,9 @@ export default function HomeScreen() {
   {
     titulo: 'Inspirações', icon: 'star-box-multiple' ,data:[]
   },
-   {
-    titulo: 'Materias', icon: 'star-box-multiple' ,data:[]
-  }
+  //  {
+  //   titulo: 'Materias', icon: 'star-box-multiple' ,data:[]
+  // }
 ]
   function irRota(tela: string) {
     
@@ -70,6 +70,11 @@ export default function HomeScreen() {
 
         </Pressable>
         ))}
+        {/* <View className='items-start mt-10'>
+           <Pressable className=' justify-center items-center mt-6 py-1 rounded-padrao'>
+                            <MaterialCommunityIcons name='delete' size={35} color={colors.texto2}/>
+                        </Pressable>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   )

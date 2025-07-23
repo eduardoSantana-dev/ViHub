@@ -53,6 +53,10 @@ export default function EditarProjeto() {
                         <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-azul'>
                             <Text className='font-inter-b text-2xl color-textobotao'>Salvar</Text>
                         </Pressable>
+                           <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-vermelho'>
+                            <Text className='font-inter-b text-2xl color-textobotao'>Deletar</Text>
+                        </Pressable>
+                      
                     </View>
                 </View>
             </Modal>

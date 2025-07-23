@@ -2,14 +2,16 @@ import { colors } from '@/styles/colors';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { Pressable, RectButton, Text } from 'react-native-gesture-handler';
 import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import CardTarefa from './tarefaCard';
-
+import EditarTarefa, { ModalHandles } from '@modais/tarefa/editarTarefaModal';
 
 export default function TarefaLista({ header }: Props) {
+
     const [tarefas, setTarefas] = useState<tarefa[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
+    const modalRef = useRef<ModalHandles>(null)
     const deletarIcon = () => {
         return (
             <RectButton style={[styles.icon_Swipeable, { marginRight: 25 }]} onPress={() => console.log('Delete pressed')}>
@@ -58,10 +60,15 @@ export default function TarefaLista({ header }: Props) {
     useEffect(() => {
         carregarTarefas()
     }, [])
-
+    const abrirModal = () => {
+        modalRef.current?.abrirModal()
+    }
     return (
+        <>
 
-        <FlatList
+           
+            <EditarTarefa ref={modalRef} />
+             <FlatList
             data={tarefas}
             keyExtractor={(item, index) => item.id.toString()}
 
@@ -78,8 +85,12 @@ export default function TarefaLista({ header }: Props) {
                         renderRightActions={deletarIcon}
                         renderLeftActions={finalizarIcon}
                         onSwipeableWillOpen={(direction) => verificarLado(direction, tarefa.id)}
+                        
                     >
+                        <Pressable onPress={abrirModal}>
+
                         <CardTarefa tarefa={tarefa}/>
+                        </Pressable>
                     </ReanimatedSwipeable>
 
                 )
@@ -87,8 +98,9 @@ export default function TarefaLista({ header }: Props) {
             ListHeaderComponent={header ? () => <>{header}</> : null}
 
 
-        />
+        /> 
 
+        </>
     )
 
 }
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         justifyContent: 'center',
         paddingHorizontal: 25,
-        
+
 
     },
     icon_Swipeable: {
