@@ -45,19 +45,7 @@ export default function Layout() {
         headerShown: false,
       }}
     >
- <Tabs.Screen
-  name="projetos"
-  options={{
-    
-    tabBarIcon: ({ focused }) => (
-      <Image
-        source={require('@logo/branco.svg')}
-        style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
-      />
-    ),
-  }}
-/>
-      <Tabs.Screen
+       <Tabs.Screen
         name="index"
         options={{
 
@@ -66,20 +54,33 @@ export default function Layout() {
           ),
         }}
       />
+  <Tabs.Screen
+    name="tarefas"
+    options={{
 
-      <Tabs.Screen
-        name="tarefas"
-        options={{
+      tabBarIcon: ({ color }) => (
+        <MaterialCommunityIcons name="clipboard-text-multiple-outline" size={icon_size} color={color} />
 
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="clipboard" size={icon_size} color={color} />
-
-          ),
-        }}
+      ),
+    }}
+  />
+ <Tabs.Screen
+  name="projetos"
+  options={{
+    
+    tabBarIcon: ({ focused }) => (
+      <Image
+        source={require('@logo/branco.png')}
+        style={{ width: 40, height: 40, opacity: focused ? 1 : 0.4 }}
       />
+    ),
+  }}
+/>
+     
+
     
       <Tabs.Screen
-        name="index4"
+        name="estudos"
         options={{
 
           tabBarIcon: ({ color }) => (
@@ -88,7 +89,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="index2"
+        name="financeiro"
         options={{
 
           tabBarIcon: ({ color }) => (

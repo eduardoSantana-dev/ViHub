@@ -1,18 +1,28 @@
 import { colors } from '@colors';
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useState,forwardRef, useImperativeHandle } from 'react';
 import { Modal, Pressable, Text, TextInput, TouchableOpacity, View, Platform } from 'react-native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { format, isThisWeek, isToday, isTomorrow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-export default function CriarTarefa() {
+
+export interface ModalHandles {
+  abrirModal: () => void;
+
+}
+const EditarTarefa = forwardRef<ModalHandles>((props, ref) => {
+
     const [visible, setVisible] = useState(false);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState<'date' | 'time'>('date');
-    const [showPrazo,setShowPrazo] = useState(false)
+    const [showPrazo,setShowPrazo] = useState(true)
+        const [selected, setSelected] = useState<string | null>(null);
 
+const options = ['A fazer', 'Finalizado', 'Atrasado'];
+
+    
     function formatarDataPersonalizada(date: Date): string {
         if (isToday(date)) return `Hoje às ${format(date, "HH:mm")}`;
         if (isTomorrow(date)) return `Amanhã às ${format(date, "HH:mm")}`;
@@ -32,18 +42,19 @@ export default function CriarTarefa() {
             setShow(Platform.OS === 'ios');
         }
     };
-
+   
+      useImperativeHandle(ref, () => ({
+    abrirModal: () => setVisible(true),
+    
+  }));
     return (
         <View>
-            <TouchableOpacity onPress={() => setVisible(true)}>
-                <Ionicons name="add-circle-outline" size={45} color={colors.texto2} />
-            </TouchableOpacity>
-
+            
             <Modal visible={visible} transparent animationType="fade">
                 <View className='flex-1 items-center justify-center bg-fundoModal'>
                     <View className='w-5/6 px-4 py-4 bg-cards items-center rounded-padrao'>
                         <View className='flex-row items-center justify-between w-full'>
-                            <Text className='text-2xl color-texto font-inter-b'>Nova tarefa</Text>
+                            <Text className='text-2xl color-texto font-inter-b'>Editar tarefa</Text>
                             <TouchableOpacity onPress={() => setVisible(false)}>
                                 <Ionicons name="close" size={27} color={colors.texto} />
                             </TouchableOpacity>
@@ -54,7 +65,7 @@ export default function CriarTarefa() {
                                 className="w-11/12 h-full text-white font-inter-b"
                                 style={{ textAlignVertical: 'top' }}
                                 multiline
-                                placeholder="Descrição"
+                                placeholder="Nome"
                                 maxLength={300}
                                 placeholderTextColor={colors.texto2}
                             />
@@ -77,9 +88,25 @@ export default function CriarTarefa() {
                             <Text className='font-inter-b text-xl color-texto'>Definir prazo</Text>
                         </TouchableOpacity>
                         }
+                        <View className='w-full mt-3'>
+                            {options.map((option, index) => (
+                                <Pressable
+                                    key={index}
+                                    className={`flex-row items-center px-1 py-2 w-full rounded-padrao ${selected === option ? 'bg-azul2' : 'bg-cards'
+                                        }`}
+                                    onPress={() => setSelected(option)}
+                                >
+                                    <View
+                                        className={`w-4 h-4 rounded-full border mr-2 ${selected === option ? 'bg-azul border-azulescuro' : 'border-texto2'
+                                            }`}
+                                    />
+                                    <Text className={` font-inter-b ${selected === option ? 'text-azul' : 'text-texto2'}`}>{option}</Text>
+                                </Pressable>
+                            ))}
+                        </View>
 
                         <Pressable className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul'>
-                            <Text className='font-inter-b text-2xl color-textobotao'>Criar</Text>
+                            <Text className='font-inter-b text-2xl color-textobotao'>Salvar</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -95,4 +122,6 @@ export default function CriarTarefa() {
             )}
         </View>
     );
-}
+})
+
+export default EditarTarefa;

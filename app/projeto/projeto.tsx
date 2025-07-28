@@ -26,7 +26,7 @@ export default function HomeScreen() {
   function irRota(tela: string) {
     
   router.push({
-  pathname: "/template/listaBase",
+  pathname: "/template/templateTarefa",
   params: { idAtividade ,tela,atividade},
 });
 }
@@ -35,7 +35,7 @@ export default function HomeScreen() {
       <ScrollView className='flex-1 px-pp'>
         <View className='flex-row -600  gap-2'>
           <View className='w-20 h-20 '>
-            <Image source={require('@logo/branco.svg')} className='w-full h-full' />
+            <Image source={require('@logo/branco.png')} className='w-full h-full' />
           </View>
           <View className='justify-center mt-4'>
             <View className='flex-row items-center gap-4'>

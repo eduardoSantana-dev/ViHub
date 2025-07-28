@@ -54,7 +54,7 @@ const options = ['A fazer', 'Finalizado', 'Atrasado'];
                 <View className='flex-1 items-center justify-center bg-fundoModal'>
                     <View className='w-5/6 px-4 py-4 bg-cards items-center rounded-padrao'>
                         <View className='flex-row items-center justify-between w-full'>
-                            <Text className='text-2xl color-texto font-inter-b'>Sua tarefa</Text>
+                            <Text className='text-2xl color-texto font-inter-b'>Editar tarefa</Text>
                             <TouchableOpacity onPress={() => setVisible(false)}>
                                 <Ionicons name="close" size={27} color={colors.texto} />
                             </TouchableOpacity>
@@ -65,7 +65,7 @@ const options = ['A fazer', 'Finalizado', 'Atrasado'];
                                 className="w-11/12 h-full text-white font-inter-b"
                                 style={{ textAlignVertical: 'top' }}
                                 multiline
-                                placeholder="Nome"
+                                placeholder="Descrição"
                                 maxLength={300}
                                 placeholderTextColor={colors.texto2}
                             />
@@ -88,6 +88,7 @@ const options = ['A fazer', 'Finalizado', 'Atrasado'];
                             <Text className='font-inter-b text-xl color-texto'>Definir prazo</Text>
                         </TouchableOpacity>
                         }
+                         <Text className='color-texto2 font-inter-b w-full mt-5 text-2xl'>Status</Text>
                         <View className='w-full mt-3'>
                             {options.map((option, index) => (
                                 <Pressable
@@ -106,7 +107,7 @@ const options = ['A fazer', 'Finalizado', 'Atrasado'];
                         </View>
 
                         <Pressable className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul'>
-                            <Text className='font-inter-b text-2xl color-textobotao'>Criar</Text>
+                            <Text className='font-inter-b text-2xl color-textobotao'>Salvar</Text>
                         </Pressable>
                     </View>
                 </View>
