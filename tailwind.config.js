@@ -41,6 +41,9 @@ module.exports = {
       width:{
         'img':'10.8rem',
         'dateInput':'47%'
+      },
+      height:{
+        'input':'70px'
       }
     },
   },

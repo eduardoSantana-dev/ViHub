@@ -64,8 +64,8 @@ export default function calendarioHome() {
         {
             dia: '28',
             tarefas: [
-                { id: 14, titulo: 'Limpar a casa', prazo: '09:00 às 10:30' },
-                { id: 15, titulo: 'Preparar relatório', prazo: '11:00 às 13:00' }
+                { id: 14, titulo: 'Limpar a casa', prazo: '09:00 às 10:45' },
+                { id: 15, titulo: 'Preparar relatório', prazo: '11:00 às 13:40' }
             ]
         },
         {
@@ -86,7 +86,7 @@ export default function calendarioHome() {
             <View className='w-full  flex-row p1-2 justify-evenly gap-2'>
                 {dias.map((dias) => (
                     <Pressable className={`items-center p-0 m-0 justify-center px-2 rounded-lg  h-20 ${select === dias.dia ? 'bg-azul' : ''} `} key={dias.dia} onPress={() => setSelect(dias.dia)}>
-                        <Text className={`font-inter text-xl p-0 m-0  ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.dia}</Text>
+                        <Text className={`font-inter-m text-xl p-0 m-0  ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.dia}</Text>
                         <Text className={`text-lg p-0 m-0 capitalize ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.Semana}</Text>
                         <MaterialCommunityIcons name='circle' color={select === dias.dia ? colors.texto : colors.cards} size={10} />
                     </Pressable>
@@ -98,7 +98,7 @@ export default function calendarioHome() {
                     <View className='bg-azul3 w-full h-10 rounded-padrao flex-row items-center justify-between px-3' key={atividade.id}>
                         <View className='flex-row items-center gap-2 '>
                             <MaterialCommunityIcons name='circle' size={16} color={colors.azul} />
-                            <Text className='font-inter-m color-texto'>{atividade.titulo}</Text>
+                            <Text className='font-inter-m color-texto'>{atividade.titulo} </Text>
                         </View>
                         <Text className='font-inter-m color-texto2'>{atividade.prazo}</Text>
                     </View>

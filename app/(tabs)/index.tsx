@@ -17,13 +17,11 @@ export default function Home() {
     <SafeAreaView className="flex-1 bg-fundo px-pp">
       <View className='flex-row justify-between items-center  mt-14'>
         <View className='gap-4 flex-row'>
-          <View className='rounded-full overflow-hidden w-16 h-16'>
-            <Image source={require('@/assets/images/teste.jpeg')} className='object-cover w-full h-full' />
-          </View>
-          <View className='justify-center'>
+          
+          <Pressable onPress={()=> router.push('/formularios/login')} className='justify-center'>
             <Text className='font-inter-b text-3xl color-texto'>Olá Eduardo</Text>
             <Text className='font-inter text-sm color-azul'>10 avisos para você</Text>
-          </View>
+          </Pressable>
         </View>
         <View className=''>
           <Image source={require('@logo/azul.png')} className='w-12 h-12' />
@@ -35,12 +33,12 @@ export default function Home() {
       <View>
         <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 ' onPress={() => verProjeto(2)}>
         <View className='flex-row justify-between'>
-          <Text className='font-inter-b text-3xl text-texto mt-2'>Vihub</Text>
+          <Text className='font-inter-b text-3xl text-texto mt-2'>Vihub </Text>
           <Image source={require('@logo/branco.png')} className='w-7 h-7' />
         </View>
         <View className='flex-row justify-between mt-3'>
-          <Text className='font-inter-m text-texto2 text-lg'>5 Trefas</Text>
-          <Text className='font-inter-m text-texto2 text-lg'>Em andamento</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>5 Tarefas</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>Em planejamento</Text>
         </View>
 
       </Pressable>
@@ -50,8 +48,8 @@ export default function Home() {
           <Image source={require('@logo/branco.png')} className='w-7 h-7' />
         </View>
         <View className='flex-row justify-between mt-3'>
-          <Text className='font-inter-m text-texto2 text-lg'>5 Trefas</Text>
-          <Text className='font-inter-m text-texto2 text-lg'>Em andamento</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>1 tarefas</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>Em planejamento</Text>
         </View>
 
       </Pressable>

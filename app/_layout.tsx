@@ -34,7 +34,21 @@ export default function Layout() {
   <Stack.Screen
     name="(tabs)"
     options={{
-      headerShown: false, // Esconde o header na rota (tabs)
+      headerShown: false, 
+    }}
+  />
+   <Stack.Screen
+    name="formularios/login"
+    options={{
+      headerShown: false, 
+      animation: 'fade',
+    }}
+  />
+   <Stack.Screen
+    name="formularios/cadastro"
+    options={{
+      headerShown: false, 
+      animation: 'fade',
     }}
   />
 </Stack>
