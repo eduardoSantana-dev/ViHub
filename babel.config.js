@@ -5,8 +5,12 @@ module.exports = function (api) {
       ["babel-preset-expo", { jsxImportSource: "nativewind" }],
       "nativewind/babel",
     ],
-     plugins: [
-      "react-native-reanimated/plugin" // Adicione esta linha
+    plugins: [
+      // Adicione APENAS este plugin do WatermelonDB como PRIMEIRO
+      ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      
+      // Mantenha os plugins que já estavam funcionando
+      "react-native-reanimated/plugin"
     ],
   };
 };
