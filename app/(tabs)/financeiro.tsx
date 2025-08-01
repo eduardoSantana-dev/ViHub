@@ -7,19 +7,19 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import database from '../../database/database';
-import TarefaModel from '../../database/models/tarefa';
+import database from '@database';
+import Usuarios from '@models/usuarios';
 
 const TarefasTeste = () => {
   const [titulo, setTitulo] = useState('');
-  const [tarefas, setTarefas] = useState<TarefaModel[]>([]);
+  const [tarefas, setTarefas] = useState<Usuarios[]>([]);
 
   const adicionarTarefa = async () => {
     if (!titulo.trim()) return;
-
+    console.log(titulo)
     await database.write(async () => {
-      await database.get<TarefaModel>('tarefa').create(tarefa => {
-        tarefa.title = titulo;
+      await database.get<Usuarios>('tarefas').create(Usuarios => {
+        Usuarios.nome = titulo;
       });
     });
 
@@ -28,12 +28,14 @@ const TarefasTeste = () => {
   };
 
   const listarTarefas = async () => {
-    const resultado = await database.get<TarefaModel>('tarefa').query().fetch();
+    const resultado = await database.get<Usuarios>('usuarios').query().fetch();
     setTarefas(resultado);
+    console.log(resultado)
   };
 
   useEffect(() => {
     listarTarefas();
+    console.log(tarefas)
   }, []);
 
   return (
@@ -58,7 +60,7 @@ const TarefasTeste = () => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.tarefaTexto}>{item.title}</Text>
+            <Text style={styles.tarefaTexto}>{item.nome}</Text>
           </View>
         )}
         style={styles.lista}

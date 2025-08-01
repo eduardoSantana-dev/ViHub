@@ -1,9 +1,13 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strict": true,
     "paths": {
     "@colors*": ["./styles/colors.ts"],
+    "@database": ["./database/database.ts"],
+    "@models*": ["./database/models/*"],
      "@listas/*": ["./components/listas/*"],
      "@cards/*": ["./components/cards/*"],
      "@modais/*": ["./components/modais/*"],
