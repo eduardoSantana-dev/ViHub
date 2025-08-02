@@ -4,8 +4,12 @@ import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../styles/colors';
 import EditarProjeto from '@modais/projeto//editarProjetoModal'
+import { useEffect,useState } from 'react';
+
+import ProjetoController from '@constrollers/projetoController';
 export default function HomeScreen() {
   const { idAtividade } = useLocalSearchParams();
+const [projeto, setProjeto] = useState<Projeto | null>(null);
   const atividade ='projeto'
   const dataTeste = [{id:1,desc:'Prototipar projeto no figma'},{id:2,desc:'Prototipar projeto no figma2'},{id:3,desc:'Prototipar projeto no figma2'}]
   
@@ -19,9 +23,6 @@ export default function HomeScreen() {
   {
     titulo: 'Inspirações', icon: 'star-box-multiple' ,data:[]
   },
-  //  {
-  //   titulo: 'Materias', icon: 'star-box-multiple' ,data:[]
-  // }
 ]
   function irRota(tela: string) {
     
@@ -30,6 +31,18 @@ export default function HomeScreen() {
   params: { idAtividade ,tela,atividade},
 });
 }
+  useEffect(() => {
+    async function infoProjeto() {
+      try {
+        const result = await ProjetoController.projetoInfo(idAtividade as string);  
+       setProjeto(result);
+    } catch (error) { 
+        console.error("Erro ao busca informações do projeto:", error);
+    }
+  }
+    infoProjeto()
+
+  },[])
   return (
     <SafeAreaView className='bg-fundo flex-1'>
       <ScrollView className='flex-1 px-pp'>
@@ -40,12 +53,12 @@ export default function HomeScreen() {
           <View className='justify-center mt-4'>
             <View className='flex-row items-center gap-4'>
               <Text className='font-inter-b text-4xl  w-64 flex-wrap color-texto'>
-                Vihub
+                {projeto?.nome}
               </Text>
-              <EditarProjeto/>
+              <EditarProjeto id={projeto?.id as string} />
             </View>
             <Text className='font-inter-b text-xl color-texto2'>
-              Em andamento
+            {projeto?.status}
             </Text>
           </View>
         </View>
@@ -70,11 +83,6 @@ export default function HomeScreen() {
 
         </Pressable>
         ))}
-        {/* <View className='items-start mt-10'>
-           <Pressable className=' justify-center items-center mt-6 py-1 rounded-padrao'>
-                            <MaterialCommunityIcons name='delete' size={35} color={colors.texto2}/>
-                        </Pressable>
-        </View> */}
       </ScrollView>
     </SafeAreaView>
   )

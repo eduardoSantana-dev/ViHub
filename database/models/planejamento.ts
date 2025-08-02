@@ -1,6 +1,6 @@
 import { Model, Relation } from '@nozbe/watermelondb';
 import { field, relation } from '@nozbe/watermelondb/decorators';
-import Usuarios from './usuarios';
+import Usuarios from './Usuarios';
 export default class Planejamento extends Model {
     static table: string = 'planejamento';
     @field('id_usuario') id_usuario!: string;

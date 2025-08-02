@@ -19,7 +19,7 @@ export default function Home() {
         <View className='gap-4 flex-row'>
           
           <Pressable onPress={()=> router.push('/formularios/login')} className='justify-center'>
-            <Text className='font-inter-b text-3xl color-texto'>Olá Eduardo</Text>
+            <Text className='font-inter-extra text-3xl color-texto'>Olá Eduardo</Text>
             <Text className='font-inter text-sm color-azul'>10 avisos para você</Text>
           </Pressable>
         </View>
@@ -33,23 +33,23 @@ export default function Home() {
       <View>
         <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 ' onPress={() => verProjeto(2)}>
         <View className='flex-row justify-between'>
-          <Text className='font-inter-b text-3xl text-texto mt-2'>Vihub </Text>
+          <Text className='font-inter-b text-3xl text-texto mt-2'>Vihub</Text>
           <Image source={require('@logo/branco.png')} className='w-7 h-7' />
         </View>
         <View className='flex-row justify-between mt-3'>
-          <Text className='font-inter-m text-texto2 text-lg'>5 Tarefas</Text>
-          <Text className='font-inter-m text-texto2 text-lg'>Em planejamento</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>6 Tarefas</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>Em andamento</Text>
         </View>
 
       </Pressable>
       <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 ' onPress={() => verProjeto(2)}>
         <View className='flex-row justify-between'>
-          <Text className='font-inter-b text-3xl text-texto mt-2'>ZapZap2</Text>
+          <Text className='font-inter-b text-3xl text-texto mt-2'>ZapZap3</Text>
           <Image source={require('@logo/branco.png')} className='w-7 h-7' />
         </View>
         <View className='flex-row justify-between mt-3'>
-          <Text className='font-inter-m text-texto2 text-lg'>1 tarefas</Text>
-          <Text className='font-inter-m text-texto2 text-lg'>Em planejamento</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>7 tarefas</Text>
+          <Text className='font-inter-m text-texto2 text-lg'>Finalizado</Text>
         </View>
 
       </Pressable>

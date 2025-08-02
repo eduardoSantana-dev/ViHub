@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import database from '@database';
-import Usuarios from '@models/usuarios';
+import Usuarios from '@modelsisuarios';
 
 const TarefasTeste = () => {
   const [titulo, setTitulo] = useState('');
@@ -40,7 +40,7 @@ const TarefasTeste = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Minhas Tarefas</Text>
+      <Text style={styles.title}>Minhas Tarefa2s</Text>
 
       <View style={styles.inputContainer}>
         <TextInput

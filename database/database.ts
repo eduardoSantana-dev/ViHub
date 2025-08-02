@@ -18,7 +18,7 @@ import Projetos from './models/projetos'
 import Tarefas_projeto from './models/tarefas_projeto'
 import Tarefas_materia from './models/tarefas_materia'
 import Tarefas from './models/tarefas'
-import Usuarios from './models/usuarios'
+import Usuarios from './models/Usuarios'
 const adapter = new SQLiteAdapter({
   schema,
   dbName: 'Vihub',

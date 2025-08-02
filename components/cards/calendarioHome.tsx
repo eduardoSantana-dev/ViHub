@@ -24,7 +24,7 @@ export default function calendarioHome() {
     }
     const tarefasLista = [
         {
-            dia: '30',
+            dia: '31',
             tarefas: [
                 { id: 1, titulo: 'Estudar React Native', prazo: '08:00 às 10:00' },
                 { id: 2, titulo: 'Reunião com equipe', prazo: '14:00 às 15:30' },
@@ -47,14 +47,14 @@ export default function calendarioHome() {
             ]
         },
         {
-            dia: '31',
+            dia: '04',
             tarefas: [
                 { id: 9, titulo: 'Desenvolver API', prazo: '09:00 às 12:00' },
                 { id: 10, titulo: 'Testar funcionalidades', prazo: '14:00 às 15:30' }
             ]
         },
         {
-            dia: '27',
+            dia: '03',
             tarefas: [
                 { id: 11, titulo: 'Atualizar portfólio', prazo: '08:00 às 09:30' },
                 { id: 12, titulo: 'Estudar TypeScript', prazo: '10:00 às 11:30' },
@@ -62,14 +62,14 @@ export default function calendarioHome() {
             ]
         },
         {
-            dia: '28',
+            dia: '05',
             tarefas: [
                 { id: 14, titulo: 'Limpar a casa', prazo: '09:00 às 10:45' },
                 { id: 15, titulo: 'Preparar relatório', prazo: '11:00 às 13:40' }
             ]
         },
         {
-            dia: '29',
+            dia: '06',
             tarefas: [
                 { id: 16, titulo: 'Backup do projeto', prazo: '08:30 às 09:30' },
                 { id: 17, titulo: 'Fazer compras', prazo: '10:00 às 11:30' },
@@ -86,7 +86,7 @@ export default function calendarioHome() {
             <View className='w-full  flex-row p1-2 justify-evenly gap-2'>
                 {dias.map((dias) => (
                     <Pressable className={`items-center p-0 m-0 justify-center px-2 rounded-lg  h-20 ${select === dias.dia ? 'bg-azul' : ''} `} key={dias.dia} onPress={() => setSelect(dias.dia)}>
-                        <Text className={`font-inter-m text-xl p-0 m-0  ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.dia}</Text>
+                        <Text className={`font-inter-b text-xl p-0 m-0  ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.dia}</Text>
                         <Text className={`text-lg p-0 m-0 capitalize ${select === dias.dia ? 'color-texto' : 'color-texto2'} `}>{dias.Semana}</Text>
                         <MaterialCommunityIcons name='circle' color={select === dias.dia ? colors.texto : colors.cards} size={10} />
                     </Pressable>
@@ -98,9 +98,9 @@ export default function calendarioHome() {
                     <View className='bg-azul3 w-full h-10 rounded-padrao flex-row items-center justify-between px-3' key={atividade.id}>
                         <View className='flex-row items-center gap-2 '>
                             <MaterialCommunityIcons name='circle' size={16} color={colors.azul} />
-                            <Text className='font-inter-m color-texto'>{atividade.titulo} </Text>
+                            <Text className='font-inter-b color-texto'>{atividade.titulo} </Text>
                         </View>
-                        <Text className='font-inter-m color-texto2'>{atividade.prazo}</Text>
+                        <Text className='font-inter color-texto2'>{atividade.prazo}</Text>
                     </View>
                 ))}
 

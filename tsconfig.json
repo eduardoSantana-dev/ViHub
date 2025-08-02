@@ -8,6 +8,7 @@
     "@colors*": ["./styles/colors.ts"],
     "@database": ["./database/database.ts"],
     "@models*": ["./database/models/*"],
+    "@constrollers*": ["./database/controllers/*"],
      "@listas/*": ["./components/listas/*"],
      "@cards/*": ["./components/cards/*"],
      "@modais/*": ["./components/modais/*"],
