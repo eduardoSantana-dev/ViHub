@@ -79,7 +79,7 @@ declare global {
 
 export type Projeto = {
   id: string;
-  nome: string;
+  name: string;
   id_usuario: string;
   status: string;
   criado_em: number;
@@ -198,7 +198,11 @@ export type Planejamento = {
   criado_em: number;
   atualizado_em: number;
 };
-
+type ListaProps = {
+  header: React.ReactNode;
+  selecionado: string;
+  pesquisa: string;
+};
 }
 
 export { };

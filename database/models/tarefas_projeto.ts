@@ -1,6 +1,6 @@
 import { Model, Relation } from '@nozbe/watermelondb';
 import { field, relation } from '@nozbe/watermelondb/decorators';
-import Projetos from './projetos';
+import Projetos from './projeto';
 export default class Tarefas_projeto extends Model {
     static table: string = 'tarefas_projeto'
     @field('id_projeto') id_projeto!: string;

@@ -2,7 +2,7 @@ import { Model, Relation } from '@nozbe/watermelondb';
 import { field, relation } from '@nozbe/watermelondb/decorators';
 import Usuarios from './Usuarios';  
 export default class Tarefas extends Model {
-    static table: string = 'projetos'
+    static table: string = 'tarefas'
     @field('id_usuario') id_usuario!: string;
     @field('status') status!: string;
     @field('descricao') descricao!: string;

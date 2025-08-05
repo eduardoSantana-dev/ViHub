@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import '../../styles/global.css';
+import { set } from 'date-fns';
 export default function ListaBase() {
   const { idAtividade, tela, atividade } = useLocalSearchParams();
   const [selecionado, setSelecionado] = useState('');
@@ -19,8 +20,11 @@ export default function ListaBase() {
     setSelecionado(filtro)
   }
 
+  
+    
+  
   const Header = () => (
-
+    
     <>
 
       <View className='px-pp '>
@@ -89,7 +93,7 @@ export default function ListaBase() {
         <Tarefalista header={<Header />} />
       )}
       {tela == 'Ideias' && (
-        <ListaIdeias header={<Header />} />
+        <ListaIdeias header={<Header />} selecionado={selecionado} />
       )}
       {tela == 'Inspirações' && (
         <ListaInspiracoes header={<Header />} />

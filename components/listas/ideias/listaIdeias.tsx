@@ -1,17 +1,16 @@
-import { View, Text, Pressable, ScrollView, TouchableOpacity, TextInput, Image, FlatList, StyleSheet } from 'react-native'
-import React, { useEffect, useState, useRef } from 'react'
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '@/styles/colors';
-import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import database from '@database';
+import { Ionicons } from '@expo/vector-icons';
+import Ideias from '@modelsideias';
+import { Q } from '@nozbe/watermelondb';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import IdeiaCard from './ideiaCard'
+import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
+import IdeiaCard from './ideiaCard';
 
-
-export default function ListaIdeias({ header }: Props) {
-    const [ideias, setIdeias] = useState<ideia[]>([]);
+export default function ListaIdeias({ header, selecionado }: ListaProps) {
+    const [ideias, setIdeias] = useState<Ideia[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
     const deletarIcon = () => {
         return (
@@ -20,30 +19,35 @@ export default function ListaIdeias({ header }: Props) {
             </RectButton>
         );
     };
-    function verificarLado(direction: string, id: number) {
-
-        if (direction == 'left') {
-            deletarideia(id)
-        }
-        swipeableRef.current?.close();
-
+    async function deletarIdeia(id: string) {
+        await database.write(async () => {
+            const ideia = await database.get<Ideias>('ideias').find(id);
+            if (ideia) {
+                await ideia.destroyPermanently();
+            }
+        })
     }
-    async function deletarideia(id: number) {
-        setIdeias(prev => prev.filter(t => t.id !== id));
-    }
-   
- 
-    const carregarideias = () => {
-        const temp = [
-            { id: 1, nome: 'Testa api com laravel e no banco com tudo incluso ,teste no app e no web  Testa api com laravel e no banco com tudo incluso ,teste no app e no web ', data: '20/20/2025' },
-            { id: 2, nome: 'Vicuna', data: 'em andamento' },
-            { id: 3, nome: 'TCC', data: 'atrasado' }
-        ];
-        setIdeias(temp);
+    async function carregarideias(selecionado: string ) {
+         let order: 'asc' | 'desc';
+        if (selecionado === 'recente') {
+             order ='desc';
+        } else {
+             order = 'asc';
+        }    
+        const subscription = database
+            .get<Ideias>('ideias')
+            .query(Q.sortBy('criado_em', order))
+            .observe()
+            .subscribe(setIdeias);
+
+        return () => subscription.unsubscribe();
+
     };
+
     useEffect(() => {
-        carregarideias()
-    }, [])
+        carregarideias(selecionado)
+    
+    }, [selecionado])
 
     return (
 
@@ -62,10 +66,10 @@ export default function ListaIdeias({ header }: Props) {
                         enableTrackpadTwoFingerGesture
                         rightThreshold={100}
                         renderRightActions={deletarIcon}
-                       
-                        onSwipeableWillOpen={(direction) => verificarLado(direction, ideia.id)}
+
+                        onSwipeableWillOpen={(direction) => deletarIdeia(ideia.id)}
                     >
-                        <IdeiaCard ideia={ideia}/>
+                        <IdeiaCard ideia={ideia} />
                     </ReanimatedSwipeable>
 
                 )

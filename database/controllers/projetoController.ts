@@ -1,15 +1,15 @@
 import database from "@database";
-import Projetos from "@models/projetos";
+import Projetos from "@modelsprojeto";
 
 export default class ProjetoController {
     
       static async todosProjetos(): Promise<Projetos[]> {
-        return await database.get<Projetos>('projetos').query().fetch()
+        return await database.get<Projetos>('projeto').query().fetch()
     }
     static async CriarProjeto(nome: string, id_usuario: string,status:string): Promise<void> {
         await database.write(async () => {
-            await database.get<Projetos>('projetos').create((p) => {
-                p.nome = nome;
+            await database.get<Projetos>('projeto').create((p) => {
+                p.name = nome;
                 p.id_usuario = id_usuario;
                 p.status = status;
                 p.criado_em = Date.now();
@@ -20,8 +20,8 @@ export default class ProjetoController {
     }
     static async deletarProjeto(id: string): Promise<void> {
        
-         const projeto = await database.get<Projetos>('projetos').find(id);
-        console.log('Deletando projet32o:', projeto.nome);
+         const projeto = await database.get<Projetos>('projeto').find(id);
+        console.log('Deletando projet32o:', projeto.name);
         await database.write(async () => {
             await projeto.markAsDeleted();
         })
@@ -30,15 +30,15 @@ export default class ProjetoController {
    
 }
     static async projetoInfo(id: string): Promise<Projetos> {
-        return  await database.get<Projetos>('projetos').find(id);
+        return  await database.get<Projetos>('projeto').find(id);
         
     }
     static async atualizarProjeto(id: string, nome: string, status: string): Promise<void> {
        try{
-        const projeto = await database.get<Projetos>('projetos').find(id);
+        const projeto = await database.get<Projetos>('projeto').find(id);
          await database.write(async () => {
             await projeto.update((proj) => {
-                proj.nome = nome;
+                proj.name = nome;
                 proj.status = status;
                 proj.atualizado_em = Date.now();
             });

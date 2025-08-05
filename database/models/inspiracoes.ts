@@ -1,6 +1,6 @@
 import { Model, Relation } from '@nozbe/watermelondb';
 import { field, relation,children } from '@nozbe/watermelondb/decorators';
-import Projetos from './projetos';
+import Projetos from './projeto';
 import Imgs_inspiracao from './imgs_inspiracao';
 import Links_inspiracao from './links_inspiracao';
 export default class Inspiracoes extends Model {

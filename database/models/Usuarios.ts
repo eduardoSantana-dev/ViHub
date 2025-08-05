@@ -1,6 +1,6 @@
 import { Model, Relation } from '@nozbe/watermelondb';
 import { field,children } from '@nozbe/watermelondb/decorators';
-import Projetos from './projetos';
+import Projetos from './projeto';
 import Tarefas from './tarefas';
 import Estudos from './estudos';
 import planejamento from './planejamento';

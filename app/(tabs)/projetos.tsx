@@ -6,21 +6,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProjetoCard from '@listas/projetos/projetoCard';
 import { colors } from '../../styles/colors';
 import '../../styles/global.css';
+import { text } from '@nozbe/watermelondb/decorators';
 export default function Projetos() {
 
-  const [selecionado, setSelecionado] = useState('');
+  const [selecionado, setSelecionado] = useState('todos');
+  const [pesquisa, setPesquisa] = useState('');
+  const [pesquisaDigitando, setPesquisaDigitando] = useState(''); // usado no input
+
   const selecionadoClass = 'bg-select  px-5  justify-center items-center rounded-padrao'
   const naoSelecionadoClass = 'bg-cards px-5 justify-center items-center rounded-padrao'
   function filtrar(filtro: string) {
     setSelecionado(filtro)
   }
   const Header = () => (
-    
-     <>
+
+    <>
       <View className='px-pp'>
         <View className='flex-row justify-between items-center'>
           <Text className='color-texto font-inter-b text-4xl'>Projetos</Text>
-          <CriarProjeto/>
+          <CriarProjeto />
         </View>
         <View className='flex-row border border-gray-700
          rounded-padrao mt-7  h-14 items-center px-2'>
@@ -28,7 +32,10 @@ export default function Projetos() {
           <TextInput className='w-11/12 text-white font-inter-b'
             placeholder="Pesquisa"
             placeholderTextColor={colors.texto2}
-
+      
+            value={pesquisaDigitando}
+            onChangeText={text => setPesquisaDigitando(text)}
+            returnKeyType="search"
           />
         </View>
       </View>
@@ -41,24 +48,25 @@ export default function Projetos() {
           <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 10 }} onPress={() => filtrar('todos')}>
             <Text className='text-texto font-inter-b'>Todos</Text>
           </Pressable>
-          <Pressable className={selecionado == 'planejamento' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('planejamento')}>
-            <Text className='text-texto font-inter-b'>Planejamento</Text>
+          <Pressable className={selecionado == 'Em planejamento' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Em planejamento')}>
+            <Text className='text-texto font-inter-b'>Em planejamento</Text>
           </Pressable>
-          <Pressable className={selecionado == 'andamento' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('andamento')}>
+          <Pressable className={selecionado == 'Em andamento' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Em andamento')}>
             <Text className='text-texto font-inter-b'>Em andamento</Text>
           </Pressable>
-          <Pressable className={selecionado == 'finalizado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('finalizado')}>
+          <Pressable className={selecionado == 'Finalizado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Finalizado')}>
             <Text className='text-texto font-inter-b'>Finalizado</Text>
           </Pressable>
         </ScrollView>
       </View>
-     </>
+    </>
 
 
   )
   return (
-    <SafeAreaView className='flex-1 bg-fundo  pt-7'>
-        <ProjetoCard header={<Header/> }/>
-      </SafeAreaView>
+    <SafeAreaView className='flex-1 bg-fundo  pt-7'
+    >
+      <ProjetoCard header={<Header />} selecionado={selecionado} pesquisa={pesquisa} />
+    </SafeAreaView>
   )
 }

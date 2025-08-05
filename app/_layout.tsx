@@ -38,6 +38,14 @@ export default function Layout() {
     }}
   />
    <Stack.Screen
+    name="projeto/projeto"
+    options={{
+      headerShown: true, 
+      animation: 'fade',
+      
+    }}
+  />
+   <Stack.Screen
     name="formularios/login"
     options={{
       headerShown: false, 

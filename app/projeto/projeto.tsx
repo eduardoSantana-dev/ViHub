@@ -27,7 +27,7 @@ const [projeto, setProjeto] = useState<Projeto | null>(null);
   function irRota(tela: string) {
     
   router.push({
-  pathname: "/template/templateTarefa",
+  pathname: "/template/templateProjeto",
   params: { idAtividade ,tela,atividade},
 });
 }
@@ -53,7 +53,7 @@ const [projeto, setProjeto] = useState<Projeto | null>(null);
           <View className='justify-center mt-4'>
             <View className='flex-row items-center gap-4'>
               <Text className='font-inter-b text-4xl  w-64 flex-wrap color-texto'>
-                {projeto?.nome}
+                {projeto?.name}
               </Text>
               <EditarProjeto id={projeto?.id as string} />
             </View>

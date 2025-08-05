@@ -2,9 +2,25 @@ import { colors } from '@colors';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable } from 'react-native';
+import Ideias from '@modelsideias';
+import database from '@database';
 export default function CriarIdeia() {
     const [visible, setVisible] = useState(false);
+    const [texto, setTexto] = useState('');
+    async function criarIdeia() {
+       
+      await database.write(async () => {
+            await database.get<Ideias>('ideias').create((i) => {
+                i.id_projeto = '1';
+                i.descricao = texto;
+                i.criado_em = Date.now();
+                i.atualizado_em = Date.now();
+            })
+        })
+        setTexto('');
 
+        setVisible(false);
+    }
     return (
         <View>
             <TouchableOpacity onPress={() => setVisible(true)} >
@@ -25,11 +41,13 @@ export default function CriarIdeia() {
                                 style={{ textAlignVertical: 'top' }}
                                 multiline
                                 placeholder="Sua ideia"
+                                onChangeText={setTexto}
+                                value={texto}
                                 maxLength={300}
                                 placeholderTextColor={colors.texto2}
                             />
                         </View>
-                        <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-azul'>
+                        <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-azul' onPress={criarIdeia}>
                             <Text className='font-inter-b text-2xl color-textobotao'>Criar</Text>
                         </Pressable>
                     </View>

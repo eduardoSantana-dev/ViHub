@@ -5,35 +5,38 @@ import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable, Styl
 import ProjetoController from '@constrollers/projetoController';
 import { set } from 'date-fns';
 import { tr } from 'date-fns/locale';
-
+import { router } from 'expo-router';
 export default function EditarProjeto({ id }: { id: string }) {
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState<string | null>(null);
     const options = ['Em planejamento', 'Finalizado', 'Em andamento'];
-    const [projeto, setProjeto] = useState<Projeto | null>(null);
+    
     const [nome, setNome] = useState('')
     async function infoProjeto() {
         if (!id) return;
         try {
-            const result = await ProjetoController.projetoInfo(id as string);
-            setProjeto(result);
-            console.log(result)
+            const projeto = await ProjetoController.projetoInfo(id as string);
+            
+            setSelected(projeto?.status || null);
+            setNome(projeto?.name || '');
         } catch (error) {
             console.error("Erro ao busca informações do projeto:", error);
         }
     }
     async function abrirModal() {
         await infoProjeto();
-        setSelected(projeto?.status || null);
-        setNome(projeto?.nome || '');
         setVisible(true);
     }
     async function salvar() {
-       
+
         try {
             await ProjetoController.atualizarProjeto(id, nome, selected as string);
             setVisible(false);
-    }catch (error) {
+            router.replace({
+                pathname: '/projeto/projeto',
+                params: { idAtividade: id, }
+            });
+        } catch (error) {
             console.error("Erro ao atualizar projeto:", error);
             alert('Erro ao atualizar projeto');
         }
