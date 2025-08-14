@@ -4,45 +4,47 @@ import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../styles/colors';
 import EditarProjeto from '@modais/projeto//editarProjetoModal'
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ProjetoController from '@constrollers/projetoController';
 export default function HomeScreen() {
   const { idAtividade } = useLocalSearchParams();
-const [projeto, setProjeto] = useState<Projeto | null>(null);
-  const atividade ='projeto'
-  const dataTeste = [{id:1,desc:'Prototipar projeto no figma'},{id:2,desc:'Prototipar projeto no figma2'},{id:3,desc:'Prototipar projeto no figma2'}]
-  
+  const [projeto, setProjeto] = useState<Projeto | null>(null);
+
+  const dataTeste = [{ id: 1, desc: 'Prototipar projeto no figma' }, { id: 2, desc: 'Prototipar projeto no figma2' }, { id: 3, desc: 'Prototipar projeto no figma2' }]
+
   const cards = [
     {
-    titulo: 'Tarefas', icon: 'clipboard-text-multiple-outline' ,data:dataTeste
-  },
-  {
-    titulo: 'Ideias', icon: 'lightbulb',data:dataTeste
-  },
-  {
-    titulo: 'Inspirações', icon: 'star-box-multiple' ,data:[]
-  },
-]
+      titulo: 'Tarefas', icon: 'clipboard-text-multiple-outline', data: dataTeste
+    },
+    {
+      titulo: 'Ideias', icon: 'lightbulb', data: dataTeste
+    },
+    {
+      titulo: 'Inspirações', icon: 'star-box-multiple', data: []
+    },
+  ]
   function irRota(tela: string) {
-    
-  router.push({
-  pathname: "/template/templateProjeto",
-  params: { idAtividade ,tela,atividade},
-});
-}
+
+    if (projeto) {
+      router.push({
+        pathname: "/template/templateProjeto",
+        params: { idProjeto: projeto.id, tela, nomeprojeto: projeto.name },
+      });
+    }
+  }
   useEffect(() => {
     async function infoProjeto() {
       try {
-        const result = await ProjetoController.projetoInfo(idAtividade as string);  
-       setProjeto(result);
-    } catch (error) { 
+        const result = await ProjetoController.projetoInfo(idAtividade as string);
+        setProjeto(result);
+      } catch (error) {
         console.error("Erro ao busca informações do projeto:", error);
+      }
     }
-  }
     infoProjeto()
 
-  },[])
+  }, [])
   return (
     <SafeAreaView className='bg-fundo flex-1'>
       <ScrollView className='flex-1 px-pp'>
@@ -58,30 +60,30 @@ const [projeto, setProjeto] = useState<Projeto | null>(null);
               <EditarProjeto id={projeto?.id as string} />
             </View>
             <Text className='font-inter-b text-xl color-texto2'>
-            {projeto?.status}
+              {projeto?.status}
             </Text>
           </View>
         </View>
-        {cards.map((card)=>(
-          <Pressable className='w-full bg-cards  mt-10 rounded-padrao flex-row p-4 pb-6 gap-5' key={card.titulo} onPress={()=> irRota(card.titulo)}>
-          <View className=''>
-            <View className='bg-azul2 p-3 rounded-3xl items-center justify-center'>
-              <MaterialCommunityIcons name={card.icon as any} size={70} color={colors.azul} />
-            </View>
-          </View>
-          <View className=''>
-            <Text className='font-inter-b text-3xl color-texto'>{card.titulo}</Text>
-            <View className='mt-2 gap-2'>
-            {card.data.map((data)=>(
-                <View className='gap-2 flex-row items-center' key={data.id}>
-                <MaterialCommunityIcons name={'circle'} size={10} color={colors.texto2} className='opacity-4' />
-                <Text className='color-texto'>{data.desc}</Text>
+        {cards.map((card) => (
+          <Pressable className='w-full bg-cards  mt-10 rounded-padrao flex-row p-4 pb-6 gap-5' key={card.titulo} onPress={() => irRota(card.titulo)}>
+            <View className=''>
+              <View className='bg-azul2 p-3 rounded-3xl items-center justify-center'>
+                <MaterialCommunityIcons name={card.icon as any} size={70} color={colors.azul} />
               </View>
-            ))}
             </View>
-          </View>
+            <View className=''>
+              <Text className='font-inter-b text-3xl color-texto'>{card.titulo}</Text>
+              <View className='mt-2 gap-2'>
+                {card.data.map((data) => (
+                  <View className='gap-2 flex-row items-center' key={data.id}>
+                    <MaterialCommunityIcons name={'circle'} size={10} color={colors.texto2} className='opacity-4' />
+                    <Text className='color-texto'>{data.desc}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
 
-        </Pressable>
+          </Pressable>
         ))}
       </ScrollView>
     </SafeAreaView>

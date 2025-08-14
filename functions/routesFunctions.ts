@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function irRotaEstudos(tela: string, idAtividade: number) {
     router.push({
@@ -41,4 +42,8 @@ export function FormatarData(timestamp: number): string {
         const ano = data.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
+    
+}
+export async function buscarIdUsuario() {
+    return await AsyncStorage.getItem('id_user');
 }

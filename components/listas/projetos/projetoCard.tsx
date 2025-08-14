@@ -4,24 +4,34 @@ import { useState, useEffect } from 'react';
 import { Redirect, router } from 'expo-router';
 import database from '@database';
 import Projetos from '@modelsprojeto';
-import { Q } from '@nozbe/watermelondb';
-export default function ListaIdeias({ header, selecionado,pesquisa }: ListaProps) {
+import { Q } from '@nozbe/watermelondb'; 
+import { buscarIdUsuario } from '@routeFunctions*';
+export default function ListaIdeias({ header, selecionado, pesquisa }: ListaProps) {
     const [projetos, setProjetos] = useState<Projetos[]>([]);
 
-   
+
     useEffect(() => {
-        
-    
-       if(pesquisa !=''){
-         const subscription = database
-      .get<Projetos>('projeto')
-      .query(Q.where('name', Q.like(`%${pesquisa}%`)))
-      .observe()
-      .subscribe(setProjetos);
-    return () => subscription.unsubscribe();
-       }
+       async function fetchProjetos() {
+         const idUser =  await buscarIdUsuario();
+        var queryCondition = Q.and( Q.where('status', selecionado),Q.where('id_usuario', idUser!));
+        if (selecionado == 'todos') {
+           queryCondition = Q.and(Q.where('id_usuario', idUser!));
+        }
+                
+        if (selecionado != '') {
+            
+            const subscription = database
+            .get<Projetos>('projeto')
+            .query(queryCondition)
+            .observe()
+            .subscribe(setProjetos);
+            return () => subscription.unsubscribe();
+            
+        }
+    }
+        fetchProjetos();
     }, [selecionado]);
-    
+
 
     function verProjeto(id: string) {
         router.push(`/projeto/projeto?idAtividade=${id}`)
@@ -31,8 +41,8 @@ export default function ListaIdeias({ header, selecionado,pesquisa }: ListaProps
         <FlatList
             data={projetos}
             keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={{ paddingBottom: 100}}
-             keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ paddingBottom: 100 }}
+            keyboardShouldPersistTaps="handled"
             renderItem={({ item: projeto }) => (
                 <Pressable className='bg-cards  px-5 py-2 rounded-padrao mt-7 mx-pp ' onPress={() => verProjeto(projeto.id)}>
                     <View className='flex-row justify-between'>

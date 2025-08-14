@@ -4,14 +4,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable } from 'react-native';
 import Ideias from '@modelsideias';
 import database from '@database';
-export default function CriarIdeia() {
+import { text } from '@nozbe/watermelondb/decorators';
+export default function CriarIdeia({ idProjeto }: { idProjeto: string }) {
     const [visible, setVisible] = useState(false);
     const [texto, setTexto] = useState('');
     async function criarIdeia() {
        
       await database.write(async () => {
             await database.get<Ideias>('ideias').create((i) => {
-                i.id_projeto = '1';
+                i.id_projeto = idProjeto;
                 i.descricao = texto;
                 i.criado_em = Date.now();
                 i.atualizado_em = Date.now();

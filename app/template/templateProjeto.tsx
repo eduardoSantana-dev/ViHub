@@ -6,13 +6,14 @@ import EditarEstudo from '@modais/estudos/editarEstudoModal';
 import CriarIdeia from '@modais/projeto/ideias/novaIdeiaModal';
 import CriarInspiracao from '@modais/projeto/inspiracao/novaInspiracaoModal';
 import { useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import '../../styles/global.css';
 import { set } from 'date-fns';
+import { el } from 'date-fns/locale';
 export default function ListaBase() {
-  const { idAtividade, tela, atividade } = useLocalSearchParams();
+  const { idProjeto, tela,nomeprojeto } = useLocalSearchParams();
   const [selecionado, setSelecionado] = useState('');
   const selecionadoClass = 'bg-select  px-5  justify-center items-center rounded-padrao'
   const naoSelecionadoClass = 'bg-cards px-5 justify-center items-center rounded-padrao'
@@ -20,7 +21,13 @@ export default function ListaBase() {
     setSelecionado(filtro)
   }
 
-  
+  useEffect(() => {
+      if (tela == 'Tarefas') {
+    filtrar('todos');
+  }else {
+    filtrar('recente');
+  }
+  },[])
     
   
   const Header = () => (
@@ -31,20 +38,15 @@ export default function ListaBase() {
         <View className='flex-row justify-between items-center'>
           <View>
             <Text className='color-texto font-inter-b text-4xl'>{tela}</Text>
-            <Text className='color-texto2 font-inter-m  text-1xl'>{atividade}</Text>
+            <Text className='color-texto2 font-inter-m  text-1xl'>{nomeprojeto}</Text>
           </View>
           {tela == 'Inspirações' && (
             <CriarInspiracao />
           )}
           {tela == 'Ideias' && (
-            <CriarIdeia />
+            <CriarIdeia idProjeto={String(idProjeto)}/>
           )}
-          {tela == 'Materias' && (
-            <View className='flex-row items-center gap-3'>
-              <EditarEstudo />
-              <CriarIdeia />
-            </View>
-          )}
+         
         </View>
 
       </View>
@@ -93,7 +95,7 @@ export default function ListaBase() {
         <Tarefalista header={<Header />} />
       )}
       {tela == 'Ideias' && (
-        <ListaIdeias header={<Header />} selecionado={selecionado} />
+        <ListaIdeias header={<Header />} selecionado={selecionado} idProjeto={String(idProjeto)}  />
       )}
       {tela == 'Inspirações' && (
         <ListaInspiracoes header={<Header />} />

@@ -9,7 +9,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import IdeiaCard from './ideiaCard';
 
-export default function ListaIdeias({ header, selecionado }: ListaProps) {
+export default function ListaIdeias({ header, selecionado,idProjeto }: IdeiaProps) {
     const [ideias, setIdeias] = useState<Ideia[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
     const deletarIcon = () => {
@@ -36,7 +36,10 @@ export default function ListaIdeias({ header, selecionado }: ListaProps) {
         }    
         const subscription = database
             .get<Ideias>('ideias')
-            .query(Q.sortBy('criado_em', order))
+            .query(
+                Q.where('id_projeto', idProjeto),
+                Q.sortBy('criado_em', order)
+            )
             .observe()
             .subscribe(setIdeias);
 

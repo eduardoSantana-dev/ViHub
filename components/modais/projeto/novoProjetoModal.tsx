@@ -3,15 +3,18 @@ import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable } from 'react-native';
-
 import ProjetoController from '@constrollers/projetoController';
-
+import { set } from 'date-fns';
+import { buscarIdUsuario } from '@routeFunctions*';
 export default function CriarProjeto() {
+   
     const [visible, setVisible] = useState(false);
     const [nome, setNome] = useState('');
     async function criarProjeto() {
         try {
-            await ProjetoController.CriarProjeto(nome, '1','Em andamento');
+            const idUser = await buscarIdUsuario();
+            await ProjetoController.CriarProjeto(nome, idUser!,'Em andamento');
+            setVisible(false);
             
         }
        catch (error) {

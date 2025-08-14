@@ -41,7 +41,19 @@ export default function EditarProjeto({ id }: { id: string }) {
             alert('Erro ao atualizar projeto');
         }
     }
-
+    async function deletar(id: string) {
+        try {
+            ProjetoController.deletarProjeto(id)
+            setVisible(false);
+            router.replace({
+                pathname: '/(tabs)/projetos',
+              
+            });
+        }catch (error) {
+            console.error("Erro ao deletar projeto:", error);
+            alert('Erro ao deletar projeto');
+        }
+    }
     return (
         <View>
             <TouchableOpacity onPress={() => abrirModal()} >
@@ -87,7 +99,7 @@ export default function EditarProjeto({ id }: { id: string }) {
                             <Text className='font-inter-b text-2xl color-textobotao'>Salvar</Text>
                         </Pressable>
                         <View className='w-full mt-2 items-start'>
-                            <Pressable onPress={() => ProjetoController.deletarProjeto(id)}>
+                            <Pressable onPress={() => deletar(id)}>
                                 <MaterialCommunityIcons name='delete' color={colors.texto2} size={20} />
                             </Pressable>
                         </View>

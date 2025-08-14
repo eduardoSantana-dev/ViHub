@@ -203,6 +203,11 @@ type ListaProps = {
   selecionado: string;
   pesquisa: string;
 };
+type IdeiaProps = {
+  header: React.ReactNode;
+  selecionado: string;
+  idProjeto: string;
+};
 }
 
 export { };
