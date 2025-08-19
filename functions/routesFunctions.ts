@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { format, isToday, isTomorrow, isThisWeek } from "date-fns";
+import { ptBR } from "date-fns/locale";
 export function irRotaEstudos(tela: string, idAtividade: number) {
     router.push({
         pathname: "/template/templateEstudos",
@@ -42,6 +43,19 @@ export function FormatarData(timestamp: number): string {
         const ano = data.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
+
+}
+export function FormatarPrazo(dateStr: string | null): string {
+   
+        if (!dateStr) return "Sem prazo definido";
+
+        const date = new Date(dateStr); 
+        if (isNaN(date.getTime())) return "Data inválida";
+
+        if (isToday(date)) return `Hoje às ${format(date, "HH:mm")}`;
+        if (isTomorrow(date)) return `Amanhã às ${format(date, "HH:mm")}`;
+        if (isThisWeek(date)) return format(date, "EEEE 'às' HH:mm", { locale: ptBR });
+        return format(date, "d 'de' MMMM 'às' HH:mm", { locale: ptBR });
     
 }
 export async function buscarIdUsuario() {

@@ -2,7 +2,7 @@ import ListaIdeias from '@listas/ideias/listaIdeias';
 import ListaInspiracoes from '@listas/inspiracao/listaInspiracaoes';
 import Tarefalista from '@listas/tarefas/tarefasLista';
 import EditarEstudo from '@modais/estudos/editarEstudoModal';
-
+import CriarTarefa from '@modais/tarefa/novaTarefaModal';
 import CriarIdeia from '@modais/projeto/ideias/novaIdeiaModal';
 import CriarInspiracao from '@modais/projeto/inspiracao/novaInspiracaoModal';
 import { useLocalSearchParams } from 'expo-router';
@@ -46,7 +46,9 @@ export default function ListaBase() {
           {tela == 'Ideias' && (
             <CriarIdeia idProjeto={String(idProjeto)}/>
           )}
-         
+          {tela == 'Tarefas' && (
+            <CriarTarefa  tipo='projeto' idAtividade={String(idProjeto)}/>
+          )}
         </View>
 
       </View>
@@ -92,7 +94,7 @@ export default function ListaBase() {
   return (
     <SafeAreaView className='flex-1 bg-fundo '>
       {tela == 'Tarefas' && (
-        <Tarefalista header={<Header />} />
+        <Tarefalista header={<Header />}  selecionado={selecionado} id_atividade={String(idProjeto)}/>
       )}
       {tela == 'Ideias' && (
         <ListaIdeias header={<Header />} selecionado={selecionado} idProjeto={String(idProjeto)}  />

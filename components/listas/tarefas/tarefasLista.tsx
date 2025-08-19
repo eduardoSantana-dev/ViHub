@@ -6,10 +6,13 @@ import { Pressable, RectButton, Text } from 'react-native-gesture-handler';
 import ReanimatedSwipeable, { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import CardTarefa from './tarefaCard';
 import EditarTarefa, { ModalHandles } from '@modais/tarefa/editarTarefaModal';
+import { buscarIdUsuario } from '@routeFunctions';
+import tarefaController from '@constrollerstarefaController';
+import  database  from '@database';
+import { Q } from '@nozbe/watermelondb'; 
+export default function TarefaLista({ header,selecionado,id_atividade }: { header?: React.ReactNode, selecionado: string, id_atividade:string}) {
 
-export default function TarefaLista({ header }: Props) {
-
-    const [tarefas, setTarefas] = useState<tarefa[]>([]);
+    const [tarefas, setTarefas] = useState<TarefaProjeto[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
     const modalRef = useRef<ModalHandles>(null)
     const deletarIcon = () => {
@@ -26,7 +29,7 @@ export default function TarefaLista({ header }: Props) {
             </RectButton>
         );
     };
-    function verificarLado(direction: string, id: number) {
+    function verificarLado(direction: string, id: string) {
 
         if (direction == 'left') {
             deletarTarefa(id)
@@ -38,10 +41,12 @@ export default function TarefaLista({ header }: Props) {
         swipeableRef.current?.close();
 
     }
-    async function deletarTarefa(id: number) {
-        setTarefas(prev => prev.filter(t => t.id !== id));
+    async function deletarTarefa(id: string) {
+        tarefaController.deletarTarefaProjeto(id
+            
+        )
     }
-    function finalizar(id: number,) {
+    function finalizar(id: string,) {
         setTarefas(prev =>
             prev.map(tarefa =>
                 tarefa.id === id ? { ...tarefa, fase: 'finalizado' } : tarefa
@@ -49,17 +54,28 @@ export default function TarefaLista({ header }: Props) {
         );
 
     }
-    const carregarTarefas = () => {
-        const temp = [
-            { id: 1, nome: 'O céu estava limpo, e o vento suave balançava as árvores enquanto o sol dourado iluminava os campos. Pessoas caminhavam tranquilas pelas ruas, aproveitando cada instante daquele dia perfeito.', fase: 'finalizado' },
-            { id: 2, nome: 'Vicuna', fase: 'em andamento' },
-            { id: 3, nome: 'TCC', fase: 'atrasado' }
-        ];
-        setTarefas(temp);
+    async function carregarTarefas (){
+        
+        var queryCondition = Q.and( Q.where('status', selecionado),Q.where('id_projeto', id_atividade!));
+        if (selecionado == 'todos') {
+           queryCondition = Q.and(Q.where('id_projeto', id_atividade!));
+           
+        }
+                
+        if (selecionado != '') {
+            
+            const subscription = database
+            .get<any>('tarefas_projeto')
+            .query(queryCondition)
+            .observe()
+            .subscribe(setTarefas);
+            return () => subscription.unsubscribe();
+            
+        }
     };
     useEffect(() => {
         carregarTarefas()
-    }, [])
+    }, [selecionado])
     const abrirModal = () => {
         modalRef.current?.abrirModal()
     }

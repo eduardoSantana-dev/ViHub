@@ -29,7 +29,7 @@ export default appSchema({
       columns: [
         { name: 'id_projeto', type: 'string', isIndexed: true },
         { name: 'descricao', type: 'string' },
-        { name: 'status', type: 'string' },
+        { name: 'status', type: 'string' , isOptional: true },
         { name: 'prazo', type: 'string', isOptional: true },
         { name: 'criado_em', type: 'number' },
         { name: 'atualizado_em', type: 'number' }
@@ -96,7 +96,7 @@ export default appSchema({
         { name: 'id_materia', type: 'string', isIndexed: true },
         { name: 'status', type: 'string' },
         { name: 'descricao', type: 'string' },
-        { name: 'prazo', type: 'string' },
+        { name: 'prazo', type: 'string' , isOptional: true  },
         { name: 'criado_em', type: 'number' },
         { name: 'atualizado_em', type: 'number' }
       ],

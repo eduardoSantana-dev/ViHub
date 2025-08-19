@@ -5,13 +5,14 @@ import { Modal, Pressable, Text, TextInput, TouchableOpacity, View, Platform } f
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { format, isThisWeek, isToday, isTomorrow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-
-export default function CriarTarefa() {
+import tarefaController from '@constrollers/tarefaController';
+export default function CriarTarefa({ tipo, idAtividade }: { tipo: string, idAtividade: string }) {
     const [visible, setVisible] = useState(false);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [mode, setMode] = useState<'date' | 'time'>('date');
-    const [showPrazo,setShowPrazo] = useState(false)
+    const [showPrazo, setShowPrazo] = useState(false)
+    const [desc, setDesc] = useState('');
 
     function formatarDataPersonalizada(date: Date): string {
         if (isToday(date)) return `Hoje às ${format(date, "HH:mm")}`;
@@ -21,78 +22,100 @@ export default function CriarTarefa() {
     }
 
     const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-        
+
         if (selectedDate) {
             setDate(selectedDate);
         }
-        if(mode =='date'){
+        if (mode == 'date') {
             setMode('time')
-        }else{
+        } else {
             setMode('date')
             setShow(Platform.OS === 'ios');
         }
     };
+    async function CriarTarefa() {
+        if (desc.trim() === '') {
+            return;
+        }
+        
+         try {
+            var prazo: Date | null = date;
+            if(!showPrazo){
+                prazo = null;
+            }
+             if (tipo === 'projeto') {
+                
+                 await tarefaController.criarTarefaProjeto(desc, String(idAtividade),prazo);
+             }
+             setVisible(false);
+         } catch (error) {
+             console.error('Erro ao criar tarefa:', error);
+         }
+    }
 
-    return (
-        <View>
-            <TouchableOpacity onPress={() => setVisible(true)}>
-                <Ionicons name="add-circle-outline" size={45} color={colors.texto2} />
-            </TouchableOpacity>
 
-            <Modal visible={visible} transparent animationType="fade">
-                <View className='flex-1 items-center justify-center bg-fundoModal'>
-                    <View className='w-5/6 px-4 py-4 bg-cards items-center rounded-padrao'>
-                        <View className='flex-row items-center justify-between w-full'>
-                            <Text className='text-2xl color-texto font-inter-b'>Nova tarefa</Text>
-                            <TouchableOpacity onPress={() => setVisible(false)}>
-                                <Ionicons name="close" size={27} color={colors.texto} />
+return (
+    <View>
+        <TouchableOpacity onPress={() => setVisible(true)}>
+            <Ionicons name="add-circle-outline" size={45} color={colors.texto2} />
+        </TouchableOpacity>
+
+        <Modal visible={visible} transparent animationType="fade">
+            <View className='flex-1 items-center justify-center bg-fundoModal'>
+                <View className='w-5/6 px-4 py-4 bg-cards items-center rounded-padrao'>
+                    <View className='flex-row items-center justify-between w-full'>
+                        <Text className='text-2xl color-texto font-inter-b'>Nova tarefa</Text>
+                        <TouchableOpacity onPress={() => setVisible(false)}>
+                            <Ionicons name="close" size={27} color={colors.texto} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View className='flex-row border border-gray-700 rounded-padrao mt-7 w-full h-52 items-center px-2'>
+                        <TextInput
+                            className="w-11/12 h-full text-white font-inter-b"
+                            style={{ textAlignVertical: 'top' }}
+                            multiline
+                            value={desc}
+                            placeholder="Descrição"
+                            onChangeText={setDesc}
+                            maxLength={300}
+                            placeholderTextColor={colors.texto2}
+                        />
+                    </View>
+
+                    {showPrazo ? (
+                        <View className='w-full flex-row items-center mt-7 gap-3'>
+                            <TouchableOpacity
+                                className='flex-row border border-gray-700 rounded-padrao  w-10/12 h-14 items-center px-3'
+                                onPress={() => setShow(true)}
+                            >
+                                <Text className='color-texto font-inter-m texto-lg'>{formatarDataPersonalizada(date)}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { setShowPrazo(false); }}>
+                                <Ionicons name="close" size={27} color={colors.texto2} />
                             </TouchableOpacity>
                         </View>
-
-                        <View className='flex-row border border-gray-700 rounded-padrao mt-7 w-full h-52 items-center px-2'>
-                            <TextInput
-                                className="w-11/12 h-full text-white font-inter-b"
-                                style={{ textAlignVertical: 'top' }}
-                                multiline
-                                placeholder="Descrição"
-                                maxLength={300}
-                                placeholderTextColor={colors.texto2}
-                            />
-                        </View>
-
-                        {showPrazo ? (
-                            <View className='w-full flex-row items-center mt-7 gap-3'>
-                            <TouchableOpacity
-                            className='flex-row border border-gray-700 rounded-padrao  w-10/12 h-14 items-center px-3'
-                            onPress={() => setShow(true)}
-                        >
-                            <Text className='color-texto font-inter-m texto-lg'>{formatarDataPersonalizada(date)}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>setShowPrazo(false)}>
-                                <Ionicons name="close" size={27} color={colors.texto2} />
-                        </TouchableOpacity>
-                        </View>
-                        ):
-                        <TouchableOpacity className='w-full justify-center items-center mt-6 py-2 rounded-padrao bg-azul2' onPress={()=>setShowPrazo(true)}>
+                    ) :
+                        <TouchableOpacity className='w-full justify-center items-center mt-6 py-2 rounded-padrao bg-azul2' onPress={() => setShowPrazo(true)}>
                             <Text className='font-inter-b text-xl color-texto'>Definir prazo</Text>
                         </TouchableOpacity>
-                        }
+                    }
 
-                        <Pressable className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul'>
-                            <Text className='font-inter-b text-2xl color-textobotao'>Criar</Text>
-                        </Pressable>
-                    </View>
+                    <Pressable className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul'>
+                        <Text className='font-inter-b text-2xl color-textobotao' onPress={() => CriarTarefa()}>Criar</Text>
+                    </Pressable>
                 </View>
-            </Modal>
+            </View>
+        </Modal>
 
-            {show && (
-                <DateTimePicker
-                    value={date}
-                    mode={mode}
-                    display={Platform.OS === 'ios' ? 'inline' : 'default'}
-                    onChange={onChange}
-                />
-            )}
-        </View>
-    );
+        {show && (
+            <DateTimePicker
+                value={date}
+                mode={mode}
+                display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                onChange={onChange}
+            />
+        )}
+    </View>
+);
 }
