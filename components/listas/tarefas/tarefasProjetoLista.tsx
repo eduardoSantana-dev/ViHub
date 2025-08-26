@@ -13,6 +13,8 @@ import { Q } from '@nozbe/watermelondb';
 export default function TarefaLista({ header,selecionado,id_atividade }: { header?: React.ReactNode, selecionado: string, id_atividade:string}) {
 
     const [tarefas, setTarefas] = useState<TarefaProjeto[]>([]);
+    const [idTarefa, setIdTarefa] = useState('');
+
     const swipeableRef = useRef<SwipeableMethods>(null);
     const modalRef = useRef<ModalHandles>(null)
     const deletarIcon = () => {
@@ -46,22 +48,16 @@ export default function TarefaLista({ header,selecionado,id_atividade }: { heade
             
         )
     }
-    function finalizar(id: string,) {
-        setTarefas(prev =>
-            prev.map(tarefa =>
-                tarefa.id === id ? { ...tarefa, fase: 'finalizado' } : tarefa
-            )
-        );
-
+    async function finalizar(id: string,) {
+        await tarefaController.finalizarTarefaProjeto(id)
+        await carregarTarefas()
     }
     async function carregarTarefas (){
-        
         var queryCondition = Q.and( Q.where('status', selecionado),Q.where('id_projeto', id_atividade!));
         if (selecionado == 'todos') {
            queryCondition = Q.and(Q.where('id_projeto', id_atividade!));
            
-        }
-                
+        }  
         if (selecionado != '') {
             
             const subscription = database
@@ -76,14 +72,15 @@ export default function TarefaLista({ header,selecionado,id_atividade }: { heade
     useEffect(() => {
         carregarTarefas()
     }, [selecionado])
-    const abrirModal = () => {
+    const abrirModal = async (id:string) => {
+        setIdTarefa(id)
         modalRef.current?.abrirModal()
     }
     return (
         <>
 
            
-            <EditarTarefa ref={modalRef} />
+            <EditarTarefa ref={modalRef} tipo={'projeto'} idTarefa={idTarefa} />
              <FlatList
             data={tarefas}
             keyExtractor={(item, index) => item.id.toString()}
@@ -103,7 +100,7 @@ export default function TarefaLista({ header,selecionado,id_atividade }: { heade
                         onSwipeableWillOpen={(direction) => verificarLado(direction, tarefa.id)}
                         
                     >
-                        <Pressable onPress={abrirModal}>
+                        <Pressable onPress={()=> abrirModal(tarefa.id)}>
 
                         <CardTarefa tarefa={tarefa}/>
                         </Pressable>

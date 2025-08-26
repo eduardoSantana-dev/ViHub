@@ -1,6 +1,6 @@
 import ListaIdeias from '@listas/ideias/listaIdeias';
 import ListaInspiracoes from '@listas/inspiracao/listaInspiracaoes';
-import Tarefalista from '@listas/tarefas/tarefasLista';
+import Tarefalista from '@listas/tarefas/tarefasProjetoLista';
 import EditarEstudo from '@modais/estudos/editarEstudoModal';
 import CriarTarefa from '@modais/tarefa/novaTarefaModal';
 import CriarIdeia from '@modais/projeto/ideias/novaIdeiaModal';
@@ -68,8 +68,23 @@ export default function ListaBase() {
                   <Text className='text-texto font-inter-b'>Mais antigas</Text>
                 </Pressable>
               </>
-            ) :
+            ) : tela == 'Tarefas' ? (
               <>
+                <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 10 }} onPress={() => filtrar('todos')}>
+                  <Text className='text-texto font-inter-b'>Todos</Text>
+                </Pressable>
+                <Pressable className={selecionado == 'a fazer' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('a fazer')}>
+                  <Text className='text-texto font-inter-b'>A fazer</Text>
+                </Pressable>
+                <Pressable className={selecionado == 'Atrasado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Atrasado')}>
+                  <Text className='text-texto font-inter-b'>Atrasados</Text>
+                </Pressable>
+                <Pressable className={selecionado == 'finalizado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('finalizado')}>
+                  <Text className='text-texto font-inter-b'>Finalizados</Text>
+                </Pressable>
+              </>
+      ):
+        <>
                 <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 10 }} onPress={() => filtrar('todos')}>
                   <Text className='text-texto font-inter-b'>Todos</Text>
                 </Pressable>
@@ -83,7 +98,7 @@ export default function ListaBase() {
                   <Text className='text-texto font-inter-b'>Finalizado</Text>
                 </Pressable>
               </>
-            }
+      }
           </ScrollView>
         </View>
       )}

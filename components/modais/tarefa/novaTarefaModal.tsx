@@ -34,6 +34,7 @@ export default function CriarTarefa({ tipo, idAtividade }: { tipo: string, idAti
         }
     };
     async function CriarTarefa() {
+        
         if (desc.trim() === '') {
             return;
         }
@@ -101,9 +102,9 @@ return (
                         </TouchableOpacity>
                     }
 
-                    <Pressable className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul'>
-                        <Text className='font-inter-b text-2xl color-textobotao' onPress={() => CriarTarefa()}>Criar</Text>
-                    </Pressable>
+                    <TouchableOpacity className='w-4/6 justify-center items-center mt-7 py-1 rounded-padrao bg-azul' onPress={() => CriarTarefa()}>
+                        <Text className='font-inter-b text-2xl color-textobotao' >Criar</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>

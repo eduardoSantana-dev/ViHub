@@ -17,7 +17,7 @@ export default function CardTarefa({ tarefa }: { tarefa: TarefaProjeto }) {
                                     <View className='flex-row justify-between'>
                                         {tarefa.status === 'finalizado' ? (
                                             <Ionicons name='checkmark-circle-outline' size={35} color={colors.verde} />
-                                        ) : tarefa.status === 'em andamento' ? (
+                                        ) : tarefa.status === 'a fazer' ? (
                                             <Ionicons name='time-outline' size={35} color={colors.texto2} />
                                         )
                                             : (

@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import TarefaLista from '@listas/tarefas/tarefasLista';
+import TarefaLista from '@listas/tarefas/tarefasProjetoLista';
 import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
