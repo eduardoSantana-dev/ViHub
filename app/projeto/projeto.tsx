@@ -6,7 +6,7 @@ import { colors } from '../../styles/colors';
 import EditarProjeto from '@modais/projeto//editarProjetoModal'
 import { useEffect, useState } from 'react';
 
-import ProjetoController from '@constrollers/projetoController';
+import ProjetoController from '@controllers/projetoController';
 export default function HomeScreen() {
   const { idAtividade } = useLocalSearchParams();
   const [projeto, setProjeto] = useState<Projeto | null>(null);

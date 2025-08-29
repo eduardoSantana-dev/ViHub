@@ -2,9 +2,24 @@ import { colors } from '@colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { Modal, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import estudosController from '@controllers/estudosController';
+import { buscarIdUsuario } from '@routeFunctions';
 export default function CriarEstudo() {
     const [visible, setVisible] = useState(false);
+    const [nome, setNome] = useState('');
 
+    async function criarEstudo() {
+        try {
+            const idUser = await buscarIdUsuario();
+            await estudosController.criarEstudo(nome, idUser!);
+            setVisible(false);
+
+        }
+        catch (error) {
+            console.error("Erro ao criar projeto:", error);
+            alert('Erro ao criar Estudo');
+        }
+    }
     return (
         <View>
             <TouchableOpacity onPress={() => setVisible(true)} >
@@ -25,9 +40,11 @@ export default function CriarEstudo() {
                                 placeholder="Nome"
                                 placeholderTextColor={colors.texto2}
                                 maxLength={18}
+                                onChangeText={(texto) => setNome(texto)}
+
                             />
                         </View>
-                        <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-azul'>
+                        <Pressable className='w-4/6 justify-center items-center mt-6 py-1 rounded-padrao bg-azul' onPress={() => criarEstudo()}>
                             <Text className='font-inter-b text-2xl color-textobotao'>Criar</Text>
                         </Pressable>
                     </View>

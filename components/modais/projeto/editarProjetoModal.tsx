@@ -2,7 +2,7 @@ import { colors } from '@colors';
 import { useState, useEffect } from 'react';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable, StyleSheet } from 'react-native';
-import ProjetoController from '@constrollers/projetoController';
+import ProjetoController from '@controllers/projetoController';
 import { set } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { router } from 'expo-router';

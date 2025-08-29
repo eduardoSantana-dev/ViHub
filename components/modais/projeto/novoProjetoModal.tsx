@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Button, Modal, Text, TouchableOpacity, View, TextInput, Pressable } from 'react-native';
-import ProjetoController from '@constrollers/projetoController';
+import ProjetoController from '@controllers/projetoController';
 import { set } from 'date-fns';
 import { buscarIdUsuario } from '@routeFunctions*';
 export default function CriarProjeto() {

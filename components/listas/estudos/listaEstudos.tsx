@@ -8,24 +8,38 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import EstudoCard from './estudoCard'
-
-
-export default function ListaEstudos({ header }: Props) {
-    const [estudos, setEstudos] = useState<estudo[]>([]);
+import { buscarIdUsuario } from '@routeFunctions*';
+import Estudos from '@modelsestudos';
+import database from '@database';
+import { Q } from '@nozbe/watermelondb';
+export default function ListaIdeias({ header, selecionado, pesquisa }: ListaProps) {
+    const [estudos, setEstudos] = useState<Estudos[]>([]);
     const swipeableRef = useRef<SwipeableMethods>(null);
     
  
-    const carregarEstudos = () => {
-        const temp = [
-            { id: 1, nome: 'Estudo para o ENEM ', data: '20/20/2025' },
-            { id: 2, nome: 'Vicuna', data: 'em andamento' },
-            { id: 3, nome: 'TCC', data: 'atrasado' }
-        ];
-        setEstudos(temp);
-    };
-    useEffect(() => {
-        carregarEstudos()
-    }, [])
+   useEffect(() => {
+       async function fetchProjetos() {
+         const idUser =  await buscarIdUsuario();
+        var queryCondition = Q.and( Q.where('status', selecionado),Q.where('id_usuario', idUser!));
+        if (selecionado == 'todos') {
+           queryCondition = Q.and(Q.where('id_usuario', idUser!));
+        }
+                
+        if (selecionado != '') {
+            
+            const subscription = database
+            .get<Estudos>('estudos')
+            .query(queryCondition)
+            .observe()
+            .subscribe(setEstudos);
+            return () => subscription.unsubscribe();
+            
+        }
+    }
+        fetchProjetos();
+        
+    }, [selecionado]);
+
 
     return (
 

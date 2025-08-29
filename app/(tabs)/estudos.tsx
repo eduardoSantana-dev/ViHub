@@ -41,10 +41,10 @@ export default function Estudos() {
           <Pressable className={selecionado == 'todos' ? selecionadoClass : naoSelecionadoClass} style={{ marginLeft: 10 }} onPress={() => filtrar('todos')}>
             <Text className='text-texto font-inter-b'>Todos</Text>
           </Pressable>
-          <Pressable className={selecionado == 'em estudo' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('em estudo')}>
+          <Pressable className={selecionado == 'Em estudo' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Em estudo')}>
             <Text className='text-texto font-inter-b'>Em estudo</Text>
           </Pressable>
-          <Pressable className={selecionado == 'finalizado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('finalizado')}>
+          <Pressable className={selecionado == 'finalizado' ? selecionadoClass : naoSelecionadoClass} onPress={() => filtrar('Finalizado')}>
             <Text className='text-texto font-inter-b'>Finalizado</Text>
           </Pressable>
           
@@ -56,7 +56,7 @@ export default function Estudos() {
   )
   return (
     <SafeAreaView className='flex-1 bg-fundo  pt-7'>
-        <ListaEstudos header={<Header/> }/>
+        <ListaEstudos header={<Header/> } selecionado={selecionado} pesquisa=''/>
       </SafeAreaView>
   )
 }
