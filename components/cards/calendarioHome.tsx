@@ -54,7 +54,7 @@ export default function calendarioHome() {
             ]
         },
         {
-            dia: '03',
+            dia: '17',
             tarefas: [
                 { id: 11, titulo: 'Atualizar portfólio', prazo: '08:00 às 09:30' },
                 { id: 12, titulo: 'Estudar TypeScript', prazo: '10:00 às 11:30' },
@@ -62,14 +62,14 @@ export default function calendarioHome() {
             ]
         },
         {
-            dia: '05',
+            dia: '19',
             tarefas: [
                 { id: 14, titulo: 'Limpar a casa', prazo: '09:00 às 10:45' },
                 { id: 15, titulo: 'Preparar relatório', prazo: '11:00 às 13:40' }
             ]
         },
         {
-            dia: '06',
+            dia: '18',
             tarefas: [
                 { id: 16, titulo: 'Backup do projeto', prazo: '08:30 às 09:30' },
                 { id: 17, titulo: 'Fazer compras', prazo: '10:00 às 11:30' },

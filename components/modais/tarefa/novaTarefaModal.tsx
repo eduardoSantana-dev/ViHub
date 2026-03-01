@@ -5,7 +5,7 @@ import { Modal, Pressable, Text, TextInput, TouchableOpacity, View, Platform } f
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { format, isThisWeek, isToday, isTomorrow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import tarefaController from '@constrollers/tarefaController';
+import tarefaController from '@controllers/tarefaController';
 export default function CriarTarefa({ tipo, idAtividade }: { tipo: string, idAtividade: string }) {
     const [visible, setVisible] = useState(false);
     const [date, setDate] = useState(new Date());

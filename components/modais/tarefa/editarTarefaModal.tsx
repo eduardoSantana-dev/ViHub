@@ -5,7 +5,7 @@ import { Modal, Pressable, Text, TextInput, TouchableOpacity, View, Platform } f
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { format, isThisWeek, isToday, isTomorrow, set } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import tarefaController from '@constrollerstarefaController';
+import tarefaController from '@controllerstarefaController';
 
 export interface ModalHandles {
     abrirModal: () => void;
